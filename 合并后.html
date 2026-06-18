@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>迷你工坊 · Lua触发器编辑器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/blockly@10.4.3/blockly_compressed.js"></script>
+    <script src="https://unpkg.com/blockly@10.4.3/blocks_compressed.js"></script>
+    <script src="https://unpkg.com/blockly@10.4.3/javascript_compressed.js"></script>
+    <style>
+        * { user-select: none !important; -webkit-user-select: none !important; }
+        body { background-color: #1e293b; margin: 0; overflow: hidden; height: 100vh; width: 100vw; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .main-active { background-color: #38bdf8 !important; border-radius: 10px; }
+        .sub-active { background-color: #4ade80 !important; color: #064e3b; font-weight: bold; }
+        .blocklySvg { background-color: transparent !important; }
+        .blocklyMainBackground { stroke: none !important; }
+        .blocklyScrollbarBackground, .blocklyScrollbarHandle { display: none !important; }
+        .main-item, .sub-btn { transition: all 0.2s ease; }
+        .block-item {
+            transition: all 0.15s ease; cursor: pointer;
+            font-size: 11px; padding: 6px 10px;
+            background: white; border-radius: 8px;
+            border: 1px solid #e2e8f0; color: #475569;
+            display: flex; align-items: center; gap: 6px;
+            width: 100%; text-align: left;
+        }
+        .block-item:hover { background-color: #e0f2fe; border-color: #0ea5e9; transform: translateX(3px); }
+        .block-item:active { background-color: #bae6fd; }
+        .tool-btn { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; transition:all .2s; border:none; outline:none; }
+        .tool-btn.active { color:#38bdf8; background:rgba(56,189,248,0.15); cursor:pointer; }
+        .tool-btn.active:active { background:rgba(56,189,248,0.3); transform:scale(0.92); }
+        .tool-btn.disabled { color:#475569; background:transparent; opacity:0.4; pointer-events:none; }
+        .tool-btn.danger.active { color:#ef4444; background:rgba(239,68,68,0.15); }
+        .tool-btn-label { font-size:6px; color:#64748b; text-align:center; line-height:1; margin-top:1px; }
+        .tool-btn-wrap { display:flex; flex-direction:column; align-items:center; cursor:pointer; }
+        .blocklyContextMenu { z-index:99999!important; }
+        .blocklyWidgetDiv { z-index:99998!important; }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex">
+
+    <!-- 左侧工具栏 -->
+    <div class="w-14 h-full bg-[#1e3a8a] flex flex-col justify-between items-center py-3 shadow-lg flex-shrink-0" style="z-index:100">
+        <div class="flex flex-col gap-1 items-center">
+            <div class="w-7 h-7 bg-slate-700/50 rounded-full flex items-center justify-center text-white mb-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            </div>
+        </div>
+        <div class="flex flex-col gap-2 items-center" id="toolBtnGroup">
+            <div class="tool-btn-wrap" id="btnCopy"><div class="tool-btn disabled"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></div><span class="tool-btn-label">复制</span></div>
+            <div class="tool-btn-wrap" id="btnPaste"><div class="tool-btn disabled"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div><span class="tool-btn-label">粘贴</span></div>
+            <div class="tool-btn-wrap" id="btnComment"><div class="tool-btn disabled"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg></div><span class="tool-btn-label">注释</span></div>
+            <div class="tool-btn-wrap" id="btnDelete"><div class="tool-btn danger disabled"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></div><span class="tool-btn-label">删除</span></div>
+            <div class="tool-btn-wrap" id="btnClear"><div class="tool-btn danger disabled"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></div><span class="tool-btn-label">清空</span></div>
+        </div>
+        <button id="genBtn" class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white hover:brightness-110 transition flex-shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+        </button>
+    </div>
+
+    <!-- Blockly 工作区 -->
+    <div class="flex-1 h-full relative min-w-0" id="workspace-container" style="z-index:10">
+        <div id="blocklyDiv" class="absolute inset-0"></div>
+    </div>
+
+    <!-- 右侧菜单 -->
+    <div class="flex-shrink-0 h-full flex relative" style="z-index:200">
+        <div id="main-menu" class="w-12 h-full flex flex-col items-center py-2 gap-1.5 overflow-y-auto no-scrollbar bg-slate-800/90 backdrop-blur rounded-l-2xl shadow-lg"></div>
+        <div id="sub-menu-area" class="fixed right-12 top-2 bottom-2 w-16 bg-white/95 backdrop-blur rounded-2xl shadow-2xl border border-slate-200 flex flex-col items-center py-3 hidden" style="z-index:199"><div id="sub-items" class="flex-1 w-full overflow-y-auto no-scrollbar flex flex-col items-center gap-1"></div></div>
+        <div id="block-list-area" class="fixed right-[7.5rem] top-2 bottom-2 w-44 bg-white/95 backdrop-blur rounded-2xl shadow-2xl border border-slate-200 flex flex-col p-3 hidden" style="z-index:198"><h3 id="block-list-title" class="font-bold text-xs text-slate-700 mb-2 border-b pb-1.5 flex-shrink-0">积木列表</h3><div id="block-list-items" class="flex-1 overflow-y-auto no-scrollbar flex flex-col gap-1.5"></div></div>
+    </div>
+
+    <script>
+        // ================================================================
+        //  迷你世界 Lua 触发器编辑器
+        //  方案：JSON 定义 + Blockly.Extensions.registerMutator（v10 正确方式）
+        //  没有 custom init，没有 new Blockly.Mutator()
+        // ================================================================
+
+        var workspace = null;
+        try {
+            workspace = Blockly.inject('blocklyDiv', {
+                toolbox: false, trashcan: false, contextMenu: false,
+                move: { scrollbars: true, drag: true, wheel: true },
+                zoom: { controls: false, wheel: true, startScale: 1.0, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2 },
+                theme: Blockly.Themes.Dark, renderer: "zelos", gestures: true
+            });
+        } catch(e) { console.error('Blockly注入失败:', e); }
+
+        /* DATA:Lua原生 */     const BLOCK_DATA_LUA_NATIVE = {
+  "定义函数": [
+    {
+      "type": "func_def",
+      "label": "定义函数",
+      "lua": "function {{name}}({{params}})\n  {{body}}\nend",
+      "mutator": "func_params_mutator"
+    },
+    {
+      "type": "func_def_return",
+      "label": "定义有返回值函数",
+      "lua": "function {{name}}({{params}})\n  return {{result}}\nend",
+      "mutator": "func_params_mutator"
+    }
+  ],
+  "定义表": [
+    {
+      "type": "table_assign",
+      "label": "定义空表变量",
+      "lua": "local {{name}} = {}"
+    },
+    {
+      "type": "table_def",
+      "label": "定义表变量",
+      "lua": "local {{name}} = {{value}}"
+    },
+    {
+      "type": "table_create",
+      "label": "空表值 {}",
+      "lua": "{}",
+      "output": true
+    },
+    {
+      "type": "table_kv",
+      "label": "键值对表值",
+      "lua": "{\n  [{{key}}] = {{value}}\n}",
+      "output": true,
+      "mutator": "table_kv_mutator"
+    },
+    {
+      "type": "table_arr",
+      "label": "数组表值",
+      "lua": "{ {{item1}}, {{item2}} }",
+      "output": true,
+      "mutator": "table_arr_mutator"
+    }
+  ],
+  "定义数值": [
+    {
+      "type": "num_def",
+      "label": "定义数值变量",
+      "lua": "local {{name}} = {{value}}"
+    },
+    {
+      "type": "num_value",
+      "label": "数值",
+      "lua": "{{number}}",
+      "output": true
+    }
+  ],
+  "定义字符串": [
+    {
+      "type": "str_def",
+      "label": "定义字符串变量",
+      "lua": "local {{name}} = {{value}}"
+    },
+    {
+      "type": "str_value",
+      "label": "文本",
+      "lua": "\"{{text}}\"",
+      "output": true
+    }
+  ],
+  "定义布尔值": [
+    {
+      "type": "bool_true",
+      "label": "真 true",
+      "lua": "true",
+      "output": true
+    },
+    {
+      "type": "bool_false",
+      "label": "假 false",
+      "lua": "false",
+      "output": true
+    },
+    {
+      "type": "bool_def",
+      "label": "定义布尔变量",
+      "lua": "local {{name}} = {{value}}"
+    }
+  ],
+  "定义nil/删除": [
+    {
+      "type": "nil_set",
+      "label": "赋值为空 nil",
+      "lua": "{{name}} = nil"
+    },
+    {
+      "type": "field_del",
+      "label": "删除表字段",
+      "lua": "{{table}}[{{key}}] = nil"
+    }
+  ]
+}
+;
+        /* DATA:Lua全局 */     const BLOCK_DATA_LUA_GLOBAL = {};
+        /* DATA:Lua库 */     const BLOCK_DATA_LUA_LIB = {};
+        /* DATA:监听事件 */     const BLOCK_DATA_LISTENER = {};
+        /* DATA:函数库 */     const BLOCK_DATA_FUNCTION = {};
+        /* DATA:枚举库 */     const BLOCK_DATA_ENUM = {};
+        /* DATA:ID库 */     const BLOCK_DATA_ID = {};
+        /* DATA:收藏代码 */     const BLOCK_DATA_FAVORITE = {};
+
+        const DATA_MAP = {
+            "Lua原生":BLOCK_DATA_LUA_NATIVE,"Lua全局":BLOCK_DATA_LUA_GLOBAL,"Lua库":BLOCK_DATA_LUA_LIB,
+            "监听事件":BLOCK_DATA_LISTENER,"函数库":BLOCK_DATA_FUNCTION,"枚举库":BLOCK_DATA_ENUM,
+            "ID库":BLOCK_DATA_ID,"收藏代码":BLOCK_DATA_FAVORITE
+        };
+
+        const mainCategories = [
+            {name:"Lua原生",color:"#f97316"},{name:"Lua全局",color:"#eab308"},{name:"Lua库",color:"#06b6d4"},
+            {name:"监听事件",color:"#ef4444"},{name:"函数库",color:"#22c55e"},{name:"枚举库",color:"#a855f7"},
+            {name:"ID库",color:"#94a3b8"},{name:"收藏代码",color:"#f59e0b"}
+        ];
+
+        const subCategoriesMap = {
+            "Lua原生":["定义函数","定义表","定义数值","定义字符串","定义布尔值","定义nil/删除"],
+            "Lua全局":["print输出","逻辑判断","循环","运算符","比较符","类型转换","变量操作"],
+            "Lua库":["数学库","字符串库","表操作库"],
+            "监听事件":["玩家事件","方块事件","世界事件","角色事件","投掷物事件","界面事件","计时器事件","游戏事件","输入事件","生物事件"],
+            "函数库":["玩家函数","方块函数","世界函数","角色函数","投掷物函数","界面函数","背包函数","容器函数","生物函数"],
+            "枚举库":["地形枚举","生物类型枚举","方向枚举","颜色枚举","音效枚举","粒子枚举","游戏模式枚举","天气枚举","难度枚举","交互类型枚举"],
+            "ID库":["方块ID","物品ID","生物ID","道具ID","材质ID","特效ID"],
+            "收藏代码":["我的收藏","常用片段","历史记录"]
+        };
+
+        const CAT_COLORS = {"Lua原生":"#f97316","Lua全局":"#eab308","Lua库":"#06b6d4","监听事件":"#ef4444","函数库":"#22c55e","枚举库":"#a855f7","ID库":"#94a3b8","收藏代码":"#f59e0b"};
+
+        // ================================================================
+        //  辅助块注册（供 Mutator 迷你工作区使用）
+        // ================================================================
+        try {
+            Blockly.defineBlocksWithJsonArray([
+                {type:'pair',message0:'键 %1 值 %2',args0:[{type:'field_input',name:'KEY',text:'key'},{type:'input_value',name:'VALUE'}],previousStatement:null,nextStatement:null,colour:'#f97316',inputsInline:true},
+                {type:'list_item',message0:'元素 %1',args0:[{type:'input_value',name:'VALUE'}],previousStatement:null,nextStatement:null,colour:'#f97316'},
+                {type:'table_kv_container',message0:'键值对列表 %1',args0:[{type:'input_statement',name:'STACK'}],colour:'#f97316'},
+                {type:'table_arr_container',message0:'元素列表 %1',args0:[{type:'input_statement',name:'STACK'}],colour:'#f97316'},
+                {type:'param_item',message0:'参数 %1',args0:[{type:'field_input',name:'NAME',text:'param'}],previousStatement:null,nextStatement:null,colour:'#f97316'},
+                {type:'func_params_container',message0:'参数列表 %1',args0:[{type:'input_statement',name:'STACK'}],colour:'#f97316'}
+            ]);
+            console.log('✅ 辅助块');
+        } catch(e) { console.error('辅助块失败:', e); }
+
+        // ================================================================
+        //  Mutator 扩展注册（纯 mixin 对象，不要 custom init）
+        // ================================================================
+
+        // ---- table_kv_mutator ----
+        try {
+            Blockly.Extensions.registerMutator('table_kv_mutator', {
+                decompose: function(ws) {
+                    var b=this;var c=ws.newBlock('table_kv_container');c.initSvg();c.render();var conn=c.getInput('STACK').connection;var i=0;while(b.getInput('KEY_'+i))i++;
+                    for(var j=0;j<i;j++){var p=ws.newBlock('pair');p.initSvg();p.render();var f=b.getInput('KEY_'+j).fieldRow[0];if(f)p.setFieldValue(f.getValue(),'KEY');conn.connect(p.previousConnection);conn=p.nextConnection;}
+                    return c;
+                },
+                compose: function(c) {
+                    var b=this;var i=0;while(b.getInput('KEY_'+i)){b.removeInput('KEY_'+i);b.removeInput('VAL_'+i);i++;}
+                    var ch=c.getInputTargetBlock('STACK');var idx=0;
+                    while(ch){if(ch.type==='pair'){b.appendDummyInput('KEY_'+idx).appendField(new Blockly.FieldTextInput(ch.getFieldValue('KEY')||'key'),'KEY_'+idx);var vi=b.appendValueInput('VAL_'+idx).setCheck(null).appendField('=');var cv=ch.getInputTargetBlock('VALUE');if(cv){var st=Blockly.serialization.blocks.save(cv,{addCoordinates:true});if(st){var cl=Blockly.serialization.blocks.append(st,workspace);if(cl&&cl.outputConnection)vi.connection.connect(cl.outputConnection);}}idx++;}ch=ch.getNextBlock();}
+                    if(idx===0){b.appendDummyInput('KEY_0').appendField(new Blockly.FieldTextInput('key'),'KEY_0');b.appendValueInput('VAL_0').setCheck(null).appendField('=');}
+                    b.render();workspace.render();
+                },
+                saveExtraState: function(){var b=this;var p=[];var v=[];var i=0;while(b.getInput('KEY_'+i)){var f=b.getInput('KEY_'+i).fieldRow[0];p.push({key:f?f.getValue():'key'});var t=b.getInput('VAL_'+i).connection.targetBlock();v.push(t?Blockly.serialization.blocks.save(t,{addCoordinates:true}):null);i++;}return{pairs:p,vals:v};},
+                loadExtraState: function(s){if(!s||!s.pairs)return;var b=this;var i=0;while(b.getInput('KEY_'+i)){b.removeInput('KEY_'+i);b.removeInput('VAL_'+i);i++;}s.pairs.forEach(function(p,idx){b.appendDummyInput('KEY_'+idx).appendField(new Blockly.FieldTextInput(p.key||'key'),'KEY_'+idx);var vi=b.appendValueInput('VAL_'+idx).setCheck(null).appendField('=');if(s.vals&&s.vals[idx]){var cl=Blockly.serialization.blocks.append(s.vals[idx],workspace);if(cl&&cl.outputConnection)vi.connection.connect(cl.outputConnection);}});b.render();}
+            }, null, ['pair']);
+            console.log('✅ table_kv_mutator');
+        } catch(e) { console.error('table_kv_mutator失败:', e); }
+
+        // ---- table_arr_mutator ----
+        try {
+            Blockly.Extensions.registerMutator('table_arr_mutator', {
+                decompose: function(ws){
+                    var b=this;var c=ws.newBlock('table_arr_container');c.initSvg();c.render();var conn=c.getInput('STACK').connection;var i=0;while(b.getInput('ITEM_'+i))i++;
+                    for(var j=0;j<i;j++){var it=ws.newBlock('list_item');it.initSvg();it.render();conn.connect(it.previousConnection);conn=it.nextConnection;}return c;
+                },
+                compose: function(c){
+                    var b=this;var i=0;while(b.getInput('ITEM_'+i)){b.removeInput('ITEM_'+i);i++;}var ch=c.getInputTargetBlock('STACK');var idx=0;
+                    while(ch){if(ch.type==='list_item'){var ii=b.appendValueInput('ITEM_'+idx).setCheck(null).appendField('['+idx+']');var cv=ch.getInputTargetBlock('VALUE');if(cv){var st=Blockly.serialization.blocks.save(cv,{addCoordinates:true});if(st){var cl=Blockly.serialization.blocks.append(st,workspace);if(cl&&cl.outputConnection)ii.connection.connect(cl.outputConnection);}}idx++;}ch=ch.getNextBlock();}
+                    if(idx<2){for(var j=idx;j<2;j++)b.appendValueInput('ITEM_'+j).setCheck(null).appendField('['+j+']');}
+                    b.render();workspace.render();
+                },
+                saveExtraState: function(){var b=this;var c=0;while(b.getInput('ITEM_'+c))c++;var v=[];for(var j=0;j<c;j++){var t=b.getInput('ITEM_'+j).connection.targetBlock();v.push(t?Blockly.serialization.blocks.save(t,{addCoordinates:true}):null);}return{count:c,vals:v};},
+                loadExtraState: function(s){if(!s||!s.count)return;var b=this;var i=0;while(b.getInput('ITEM_'+i)){b.removeInput('ITEM_'+i);i++;}for(var j=0;j<s.count;j++){var ii=b.appendValueInput('ITEM_'+j).setCheck(null).appendField('['+j+']');if(s.vals&&s.vals[j]){var cl=Blockly.serialization.blocks.append(s.vals[j],workspace);if(cl&&cl.outputConnection)ii.connection.connect(cl.outputConnection);}}b.render();}
+            }, null, ['list_item']);
+            console.log('✅ table_arr_mutator');
+        } catch(e) { console.error('table_arr_mutator失败:', e); }
+
+        // ---- func_params_mutator ----
+        try {
+            Blockly.Extensions.registerMutator('func_params_mutator', {
+                decompose: function(ws) {
+                    var b=this;
+                    var c=ws.newBlock('func_params_container');c.initSvg();c.render();
+                    var conn=c.getInput('STACK').connection;
+                    var i=0;while(b.getInput('PARAM_'+i))i++;
+                    if(i===0){
+                        var it=ws.newBlock('param_item');it.initSvg();it.render();it.setFieldValue('param','NAME');
+                        conn.connect(it.previousConnection);
+                    } else {
+                        for(var j=0;j<i;j++){
+                            var it=ws.newBlock('param_item');it.initSvg();it.render();
+                            var f=b.getInput('PARAM_'+j).fieldRow[0];
+                            if(f)it.setFieldValue(f.getValue(),'NAME');
+                            conn.connect(it.previousConnection);conn=it.nextConnection;
+                        }
+                    }
+                    return c;
+                },
+                compose: function(c) {
+                    var b=this;
+                    var i=0;while(b.getInput('PARAM_'+i)){b.removeInput('PARAM_'+i);i++;}
+                    var ch=c.getInputTargetBlock('STACK');var names=[];
+                    while(ch){if(ch.type==='param_item')names.push(ch.getFieldValue('NAME')||'param');ch=ch.getNextBlock();}
+                    if(names.length===0)names.push('param');
+                    for(var j=0;j<names.length;j++)b.appendDummyInput('PARAM_'+j).appendField(new Blockly.FieldTextInput(names[j]),'PARAM_'+j);
+                    b.render();workspace.render();
+                },
+                saveExtraState: function(){var b=this;var p=[];var i=0;while(b.getInput('PARAM_'+i)){var f=b.getInput('PARAM_'+i).fieldRow[0];p.push(f?f.getValue():'param');i++;}return{params:p};},
+                loadExtraState: function(s){if(!s||!s.params||!s.params.length)return;var b=this;var i=0;while(b.getInput('PARAM_'+i)){b.removeInput('PARAM_'+i);i++;}s.params.forEach(function(n,idx){b.appendDummyInput('PARAM_'+idx).appendField(new Blockly.FieldTextInput(n),'PARAM_'+idx);});b.render();}
+            }, null, ['param_item']);
+            console.log('✅ func_params_mutator');
+        } catch(e) { console.error('func_params_mutator失败:', e); }
+
+        // ================================================================
+        //  注册所有积木（统一用 JSON，mutator 字段自动关联已注册扩展）
+        // ================================================================
+        try {
+            var jsonDefs = [];
+            for (var cn in DATA_MAP) {
+                var color = CAT_COLORS[cn] || '#888888';
+                var dataObj = DATA_MAP[cn];
+                for (var sn in dataObj) {
+                    dataObj[sn].forEach(function(block) {
+                        var tn = block.type;
+                        if (Blockly.Blocks[tn]) return;
+
+                        var isValue = block.output === true;
+                        var phs = block.lua.match(/\{\{(\w+)\}\}/g);
+                        if (!phs) phs = []; else phs = phs.map(function(m){return m.match(/\{\{(\w+)\}\}/)[1];});
+                        var bodyPh = phs.indexOf('body') !== -1 ? 'body' : null;
+                        var condPh = phs.indexOf('condition') !== -1 ? 'condition' : null;
+                        // 对带 mutator 的块，过滤掉由 mutator 管理的占位符
+                        var mutatorManaged = (block.mutator === 'func_params_mutator') ? ['params'] : [];
+                        var normalPhs = phs.filter(function(p){return p!=='body'&&p!=='condition'&&mutatorManaged.indexOf(p)===-1;});
+
+                        var def = {type:tn, colour:color, inputsInline:!bodyPh&&!condPh};
+                        if (block.mutator) def.mutator = block.mutator;
+                        if (isValue) def.output = null; else { def.previousStatement = null; def.nextStatement = null; }
+                        var msg = [block.label];
+                        var args = [];
+                        normalPhs.forEach(function(ph) {
+                            var idx = args.length + 1;
+                            msg.push('%'+idx);
+                            var t = (['name','key','text','table','number'].indexOf(ph) !== -1) ? 'field_input' : 'input_value';
+                            var arg = {type:t, name:ph};
+                            if (t === 'field_input') arg.text = ph;
+                            args.push(arg);
+                        });
+                        if (condPh) { var idx = args.length+1; msg.push('%'+idx); args.push({type:'input_value',name:'condition',check:null}); }
+                        if (args.length > 0) { def.message0 = msg.join(' '); def.args0 = args; } else def.message0 = block.label;
+                        if (bodyPh) { def.message1 = '%1'; def.args1 = [{type:'input_statement',name:'body'}]; }
+                        jsonDefs.push(def);
+                    });
+                }
+            }
+            if (jsonDefs.length > 0) {
+                Blockly.defineBlocksWithJsonArray(jsonDefs);
+                console.log('✅ 已注册 ' + jsonDefs.length + ' 个积木');
+            }
+        } catch(e) { console.error('积木注册失败:', e); }
+
+        // ================================================================
+        //  添加积木到工作区
+        // ================================================================
+        function addBlockToWorkspace(tn) {
+            try {
+                if (!Blockly.Blocks[tn]) { showToast('❌ 未定义:'+tn); return; }
+                var vp = workspace.getMetrics();
+                var x = vp.contentLeft + vp.viewWidth/2 + (Math.random()-0.5)*100;
+                var y = vp.contentTop + vp.viewHeight/2 + (Math.random()-0.5)*100;
+                var b = workspace.newBlock(tn); b.initSvg(); b.render(); b.moveBy(x-50,y-50);
+                workspace.render(); b.select(); showToast('✅ 已添加');
+            } catch(e) { console.error(e); showToast('❌ 积木定义不完整: '+tn); }
+        }
+
+        // ================================================================
+        //  UI 渲染
+        // ================================================================
+        var mainMenuEl = document.getElementById('main-menu');
+        var subArea = document.getElementById('sub-menu-area');
+        var listArea = document.getElementById('block-list-area');
+        var subItemsContainer = document.getElementById('sub-items');
+        var listItemsContainer = document.getElementById('block-list-items');
+        var blockListTitle = document.getElementById('block-list-title');
+
+        function clearMainActive() { document.querySelectorAll('.main-item').forEach(function(e){e.classList.remove('main-active');}); }
+        function clearSubActive() { document.querySelectorAll('.sub-btn').forEach(function(e){e.classList.remove('sub-active');}); }
+
+        function renderBlocks(subName, catName) {
+            blockListTitle.innerText = subName;
+            listItemsContainer.innerHTML = '';
+            var d = DATA_MAP[catName];
+            if (!d || !d[subName] || !d[subName].length) { listItemsContainer.innerHTML = '<div class="text-xs text-slate-400 text-center py-4 italic">暂无积木</div>'; return; }
+            d[subName].forEach(function(b) {
+                var btn = document.createElement('button');
+                btn.className = 'block-item';
+                btn.innerHTML = '<span class="w-2 h-2 rounded-full flex-shrink-0" style="background:'+(CAT_COLORS[catName]||'#94a3b8')+'"></span> '+b.label;
+                btn.addEventListener('click', function(e) { e.stopPropagation(); addBlockToWorkspace(b.type); });
+                listItemsContainer.appendChild(btn);
+            });
+        }
+
+        function renderMainMenu() {
+            mainMenuEl.innerHTML = '';
+            mainCategories.forEach(function(cat) {
+                var btn = document.createElement('div');
+                btn.className = 'cursor-pointer flex flex-col items-center justify-center w-10 h-10 rounded-xl transition-all main-item flex-shrink-0';
+                btn.style.background = cat.color + '22';
+                btn.innerHTML = '<div class="w-5 h-5 rounded flex items-center justify-center" style="background:'+cat.color+'33"><svg class="w-3.5 h-3.5" fill="'+cat.color+'" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="3"/></svg></div><span class="text-[7px] text-slate-300 mt-0.5 leading-tight text-center">'+cat.name+'</span>';
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (btn.classList.contains('main-active')) { clearMainActive(); subArea.classList.add('hidden'); listArea.classList.add('hidden'); return; }
+                    clearMainActive(); btn.classList.add('main-active');
+                    subArea.classList.remove('hidden'); listArea.classList.add('hidden');
+                    var subs = subCategoriesMap[cat.name] || [];
+                    subItemsContainer.innerHTML = '';
+                    if (!subs.length) { var d = document.createElement('div'); d.className = 'text-[9px] text-slate-400 text-center mt-4'; d.innerText = '无分类'; subItemsContainer.appendChild(d); }
+                    else {
+                        subs.forEach(function(s) {
+                            var sb = document.createElement('div');
+                            sb.className = 'sub-btn cursor-pointer flex flex-col items-center justify-center w-10 h-10 rounded-xl text-slate-600 transition-all flex-shrink-0 mb-1';
+                            sb.innerHTML = '<svg class="w-4 h-4 mb-0.5 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/></svg><span class="text-[7px] font-bold text-center leading-tight">'+s+'</span>';
+                            sb.addEventListener('click', function(e2) {
+                                e2.stopPropagation();
+                                clearSubActive(); sb.classList.add('sub-active');
+                                listArea.classList.remove('hidden');
+                                renderBlocks(s, cat.name);
+                            });
+                            subItemsContainer.appendChild(sb);
+                        });
+                    }
+                });
+                mainMenuEl.appendChild(btn);
+            });
+        }
+
+        renderMainMenu();
+
+        // ================================================================
+        //  工具栏操作
+        // ================================================================
+        function getSelectedBlock() { try { var s = Blockly.common.getSelected(); if (s && s.type && Blockly.Blocks[s.type]) return s; return null; } catch(e) { return null; } }
+
+        if (workspace) {
+            workspace.addChangeListener(function(){scheduleUpdate();});
+            document.addEventListener('click',function(){scheduleUpdate();},{passive:true});
+            setInterval(function(){try{updateToolButtons();}catch(e){}},1000);
+        }
+
+        var _ut = null;
+        function scheduleUpdate() { if(_ut)clearTimeout(_ut); _ut=setTimeout(function(){try{updateToolButtons();}catch(e){}_ut=null;},30); }
+
+        function updateToolButtons() {
+            var sel = getSelectedBlock();
+            var hb = workspace ? workspace.getTopBlocks(false).length > 0 : false;
+            setBtnState('btnCopy',sel!==null);
+            setBtnState('btnPaste',hb);
+            setBtnState('btnComment',sel!==null);
+            setBtnState('btnDelete',sel!==null);
+            setBtnState('btnClear',hb);
+        }
+        function setBtnState(id,en){var w=document.getElementById(id);if(!w)return;var b=w.querySelector('.tool-btn');if(!b)return;b.classList.toggle('disabled',!en);b.classList.toggle('active',en);}
+
+        try {
+            document.getElementById('btnCopy').addEventListener('click',function(e){if(e)e.stopPropagation();var s=getSelectedBlock();if(!s){showToast('请先选中');return;}try{Blockly.clipboard.copy(s);showToast('✅已复制');scheduleUpdate();}catch(ex){showToast('❌复制失败');}});
+            document.getElementById('btnPaste').addEventListener('click',function(e){if(e)e.stopPropagation();try{Blockly.clipboard.paste();showToast('✅已粘贴');scheduleUpdate();}catch(ex){showToast('❌粘贴失败，请先复制');}});
+            document.getElementById('btnComment').addEventListener('click',function(e){if(e)e.stopPropagation();var s=getSelectedBlock();if(!s){showToast('请先选中');return;}try{if(s.getCommentText()){s.setCommentText(null);showToast('已移除');}else{s.setCommentText('注释...');showToast('✅已添加');}}catch(ex){showToast('❌注释失败');}});
+            document.getElementById('btnDelete').addEventListener('click',function(e){if(e)e.stopPropagation();var s=getSelectedBlock();if(!s){showToast('请先选中');return;}try{var b=workspace.getBlockById(s.id);if(b){b.dispose(true);workspace.render();showToast('🗑️已删');scheduleUpdate();}}catch(ex){showToast('❌删除失败');}});
+            document.getElementById('btnClear').addEventListener('click',function(e){if(e)e.stopPropagation();var c=workspace.getTopBlocks(false).length;if(!c){showToast('空的');return;}try{if(confirm('清空？（共'+c+'个）')){workspace.clear();showToast('🧹已清');scheduleUpdate();}}catch(ex){showToast('❌清空失败');}});
+            document.getElementById('genBtn').addEventListener('click',function(){alert('XML:\n\n'+Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)));});
+        } catch(e) { console.error('按钮失败:', e); }
+
+        function showToast(m){var t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.style.cssText='position:fixed;bottom:60px;left:50%;transform:translateX(-50%);background:rgba(30,41,59,0.9);color:white;padding:8px 20px;border-radius:12px;font-size:13px;z-index:99999;transition:all 0.3s;opacity:0;pointer-events:none;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);white-space:nowrap';document.body.appendChild(t);}t.textContent=m;t.style.opacity='1';clearTimeout(t._timer);t._timer=setTimeout(function(){t.style.opacity='0';},1500);}
+
+        setTimeout(function(){try{updateToolButtons();}catch(e){}}, 200);
+        console.log('🚀 迷你世界 Lua 编辑器 — 纯 JSON + registerMutator 版');
+    </script>
+</body>
+</html>

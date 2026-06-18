@@ -1,0 +1,105 @@
+{
+  "定义函数": [
+    {
+      "type": "func_def",
+      "label": "定义函数",
+      "lua": "function {{name}}({{params}})\n  {{body}}\nend",
+      "mutator": "func_params_mutator"
+    },
+    {
+      "type": "func_def_return",
+      "label": "定义有返回值函数",
+      "lua": "function {{name}}({{params}})\n  return {{result}}\nend",
+      "mutator": "func_params_mutator"
+    }
+  ],
+  "定义表": [
+    {
+      "type": "table_assign",
+      "label": "定义空表变量",
+      "lua": "local {{name}} = {}"
+    },
+    {
+      "type": "table_def",
+      "label": "定义表变量",
+      "lua": "local {{name}} = {{value}}"
+    },
+    {
+      "type": "table_create",
+      "label": "空表值 {}",
+      "lua": "{}",
+      "output": true
+    },
+    {
+      "type": "table_kv",
+      "label": "键值对表值",
+      "lua": "{\n  [{{key}}] = {{value}}\n}",
+      "output": true,
+      "mutator": "table_kv_mutator"
+    },
+    {
+      "type": "table_arr",
+      "label": "数组表值",
+      "lua": "{ {{item1}}, {{item2}} }",
+      "output": true,
+      "mutator": "table_arr_mutator"
+    }
+  ],
+  "定义数值": [
+    {
+      "type": "num_def",
+      "label": "定义数值变量",
+      "lua": "local {{name}} = {{value}}"
+    },
+    {
+      "type": "num_value",
+      "label": "数值",
+      "lua": "{{number}}",
+      "output": true
+    }
+  ],
+  "定义字符串": [
+    {
+      "type": "str_def",
+      "label": "定义字符串变量",
+      "lua": "local {{name}} = {{value}}"
+    },
+    {
+      "type": "str_value",
+      "label": "文本",
+      "lua": "\"{{text}}\"",
+      "output": true
+    }
+  ],
+  "定义布尔值": [
+    {
+      "type": "bool_true",
+      "label": "真 true",
+      "lua": "true",
+      "output": true
+    },
+    {
+      "type": "bool_false",
+      "label": "假 false",
+      "lua": "false",
+      "output": true
+    },
+    {
+      "type": "bool_def",
+      "label": "定义布尔变量",
+      "lua": "local {{name}} = {{value}}"
+    }
+  ],
+  "定义nil/删除": [
+    {
+      "type": "nil_set",
+      "label": "赋值为空 nil",
+      "lua": "{{name}} = nil"
+    },
+    {
+      "type": "field_del",
+      "label": "删除表字段",
+      "lua": "{{table}}[{{key}}] = nil"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "BLOCK_DATA_LUA_GLOBAL": {
+    "print输出": [
+      {"type":"print_output","label":"打印输出","lua":"print({{value}})"},
+      {"type":"print_multi","label":"打印多个值","lua":"print({{v1}}, {{v2}})"},
+      {"type":"print_var","label":"调试输出变量","lua":"print(\"{{name}}=\", {{name}})"}
+    ],
+    "逻辑判断": [
+      {"type":"if_block","label":"如果 条件成立 则执行","lua":"if {{condition}} then\n  {{body}}\nend"},
+      {"type":"if_else_block","label":"如果 条件成立 否则","lua":"if {{condition}} then\n  {{body}}\nelse\n  {{else_body}}\nend"},
+      {"type":"if_elseif_block","label":"如果 否则如果 否则","lua":"if {{condition1}} then\n  {{body1}}\nelseif {{condition2}} then\n  {{body2}}\nelse\n  {{else_body}}\nend"},
+      {"type":"if_value","label":"三元选择","lua":"({{condition}} and {{true_val}} or {{false_val}})"}
+    ],
+    "循环": [
+      {"type":"while_block","label":"while 条件循环","lua":"while {{condition}} do\n  {{body}}\nend"},
+      {"type":"repeat_block","label":"repeat 直到循环","lua":"repeat\n  {{body}}\nuntil {{condition}}"},
+      {"type":"for_num_block","label":"for 数值循环","lua":"for {{name}}={{start}},{{stop}},{{step}} do\n  {{body}}\nend"},
+      {"type":"for_pairs_block","label":"for 遍历表 (pairs)","lua":"for {{k}},{{v}} in pairs({{t}}) do\n  {{body}}\nend"},
+      {"type":"for_ipairs_block","label":"for 数组循环 (ipairs)","lua":"for {{i}},{{v}} in ipairs({{t}}) do\n  {{body}}\nend"},
+      {"type":"break_stmt","label":"break 跳出循环","lua":"break"}
+    ],
+    "运算符": [
+      {"type":"op_add","label":"+ 加法","lua":"({{a}} + {{b}})","output":true},
+      {"type":"op_sub","label":"- 减法","lua":"({{a}} - {{b}})","output":true},
+      {"type":"op_mul","label":"× 乘法","lua":"({{a}} * {{b}})","output":true},
+      {"type":"op_div","label":"÷ 除法","lua":"({{a}} / {{b}})","output":true},
+      {"type":"op_pow","label":"^ 幂运算","lua":"({{a}} ^ {{b}})","output":true},
+      {"type":"op_mod","label":"% 取余数","lua":"({{a}} % {{b}})","output":true},
+      {"type":"op_concat","label":".. 字符串连接","lua":"({{a}} .. {{b}})","output":true},
+      {"type":"op_neg","label":"- 取负数","lua":"(-{{value}})","output":true},
+      {"type":"op_len","label":"# 取长度","lua":"(#{{value}})","output":true},
+      {"type":"logic_and","label":"and 并且","lua":"({{a}} and {{b}})","output":true},
+      {"type":"logic_or","label":"or 或者","lua":"({{a}} or {{b}})","output":true},
+      {"type":"logic_not","label":"not 取反","lua":"(not {{value}})","output":true}
+    ],
+    "比较符": [
+      {"type":"cmp_eq","label":"= 等于","lua":"({{a}} == {{b}})","output":true},
+      {"type":"cmp_ne","label":"≠ 不等于","lua":"({{a}} ~= {{b}})","output":true},
+      {"type":"cmp_lt","label":"< 小于","lua":"({{a}} < {{b}})","output":true},
+      {"type":"cmp_gt","label":"> 大于","lua":"({{a}} > {{b}})","output":true},
+      {"type":"cmp_le","label":"≤ 小于等于","lua":"({{a}} <= {{b}})","output":true},
+      {"type":"cmp_ge","label":"≥ 大于等于","lua":"({{a}} >= {{b}})","output":true}
+    ],
+    "类型转换": [
+      {"type":"to_string","label":"转为字符串 tostring","lua":"tostring({{value}})","output":true},
+      {"type":"to_number","label":"转为数值 tonumber","lua":"tonumber({{value}})","output":true},
+      {"type":"type_of","label":"获取类型 type","lua":"type({{value}})","output":true}
+    ],
+    "变量操作": [
+      {"type":"var_local","label":"定义局部变量","lua":"local {{name}} = {{value}}"},
+      {"type":"var_assign","label":"赋值","lua":"{{name}} = {{value}}"},
+      {"type":"var_multi_assign","label":"多重赋值","lua":"{{name1}}, {{name2}} = {{val1}}, {{val2}}"},
+      {"type":"var_global","label":"定义全局变量","lua":"{{name}} = {{value}}"}
+    ]
+  },
+  "BLOCK_DATA_LUA_LIB": {
+    "数学库": [
+      {"type":"math_abs","label":"绝对值 abs","lua":"math.abs({{x}})","output":true},
+      {"type":"math_ceil","label":"向上取整 ceil","lua":"math.ceil({{x}})","output":true},
+      {"type":"math_floor","label":"向下取整 floor","lua":"math.floor({{x}})","output":true},
+      {"type":"math_max","label":"最大值 max","lua":"math.max({{a}}, {{b}})","output":true},
+      {"type":"math_min","label":"最小值 min","lua":"math.min({{a}}, {{b}})","output":true},
+      {"type":"math_sqrt","label":"平方根 sqrt","lua":"math.sqrt({{x}})","output":true},
+      {"type":"math_random_int","label":"随机整数","lua":"math.random({{min}}, {{max}})","output":true},
+      {"type":"math_random","label":"随机小数 0~1","lua":"math.random()","output":true},
+      {"type":"math_randomseed","label":"设置随机种子","lua":"math.randomseed({{seed}})"},
+      {"type":"math_pi","label":"圆周率 π","lua":"math.pi","output":true},
+      {"type":"math_sin","label":"正弦 sin","lua":"math.sin({{x}})","output":true},
+      {"type":"math_cos","label":"余弦 cos","lua":"math.cos({{x}})","output":true},
+      {"type":"math_tan","label":"正切 tan","lua":"math.tan({{x}})","output":true},
+      {"type":"math_rad","label":"角度→弧度 rad","lua":"math.rad({{deg}})","output":true},
+      {"type":"math_deg","label":"弧度→角度 deg","lua":"math.deg({{rad}})","output":true},
+      {"type":"math_exp","label":"e的次幂 exp","lua":"math.exp({{x}})","output":true},
+      {"type":"math_log","label":"自然对数 log","lua":"math.log({{x}})","output":true},
+      {"type":"math_pow","label":"幂运算 pow","lua":"math.pow({{base}}, {{exp}})","output":true}
+    ],
+    "字符串库": [
+      {"type":"str_len","label":"字符串长度 len","lua":"string.len({{s}})","output":true},
+      {"type":"str_sub","label":"截取子串 sub","lua":"string.sub({{s}}, {{start}}, {{end}})","output":true},
+      {"type":"str_find","label":"查找文本 find","lua":"string.find({{s}}, {{pattern}})","output":true},
+      {"type":"str_gsub","label":"替换文本 gsub","lua":"string.gsub({{s}}, {{pattern}}, {{repl}})","output":true},
+      {"type":"str_format","label":"格式化字符串 format","lua":"string.format({{fmt}}, {{v1}})","output":true},
+      {"type":"str_upper","label":"转大写 upper","lua":"string.upper({{s}})","output":true},
+      {"type":"str_lower","label":"转小写 lower","lua":"string.lower({{s}})","output":true},
+      {"type":"str_reverse","label":"反转 reverse","lua":"string.reverse({{s}})","output":true},
+      {"type":"str_rep","label":"重复字符 rep","lua":"string.rep({{s}}, {{n}})","output":true},
+      {"type":"str_byte","label":"字符→编码 byte","lua":"string.byte({{s}})","output":true},
+      {"type":"str_char","label":"编码→字符 char","lua":"string.char({{code}})","output":true},
+      {"type":"str_match","label":"匹配捕获 match","lua":"string.match({{s}}, {{pattern}})","output":true}
+    ],
+    "表操作库": [
+      {"type":"table_insert","label":"表插入(末尾) insert","lua":"table.insert({{t}}, {{value}})"},
+      {"type":"table_insert_at","label":"表插入(指定位置)","lua":"table.insert({{t}}, {{pos}}, {{value}})"},
+      {"type":"table_remove","label":"表删除(末尾) remove","lua":"table.remove({{t}})"},
+      {"type":"table_remove_at","label":"表删除(指定位置)","lua":"table.remove({{t}}, {{pos}})"},
+      {"type":"table_sort","label":"表排序 sort","lua":"table.sort({{t}})"},
+      {"type":"table_concat","label":"表拼接 concat","lua":"table.concat({{t}}, {{sep}})","output":true},
+      {"type":"table_len","label":"获取表长度 #","lua":"#{{t}}","output":true},
+      {"type":"table_is_empty","label":"表是否为空","lua":"(next({{t}}) == nil)","output":true}
+    ]
+  }
+}

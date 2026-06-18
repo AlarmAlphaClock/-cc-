@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>迷你工坊 · Lua触发器编辑器</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/blockly@10.4.3/blockly_compressed.js"></script>
+<script src="https://unpkg.com/blockly@10.4.3/blocks_compressed.js"></script>
+<script src="https://unpkg.com/blockly@10.4.3/lua_compressed.js"></script>
+<script src="https://unpkg.com/blockly@10.4.3/msg/zh-hans.js"></script>
+<style>
+body{background-color:#1e293b;margin:0;overflow:hidden;height:100vh;width:100vw}
+.no-scrollbar::-webkit-scrollbar{display:none}
+.main-active{background-color:#38bdf8!important;border-radius:10px}
+.sub-active{background-color:#4ade80!important;color:#064e3b;font-weight:bold}
+.blocklySvg{background-color:transparent!important}
+.blocklyMainBackground{stroke:none!important}
+.blocklyScrollbarBackground,.blocklyScrollbarHandle{display:none!important}
+.main-item,.sub-btn{transition:all .2s ease}
+.block-item{transition:all .15s;cursor:pointer;font-size:11px;padding:6px 10px;background:white;border-radius:8px;border:1px solid #e2e8f0;color:#475569;display:flex;align-items:center;gap:6px;width:100%;text-align:left}
+.block-item:hover{background:#e0f2fe;border-color:#0ea5e9;transform:translateX(3px)}
+.tool-btn{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .2s;border:none;outline:none}
+.tool-btn.active{color:#38bdf8;background:rgba(56,189,248,0.15);cursor:pointer}
+.tool-btn.disabled{color:#475569;background:transparent;opacity:0.4;pointer-events:none}
+.tool-btn.danger.active{color:#ef4444;background:rgba(239,68,68,0.15)}
+.tool-btn-label{font-size:6px;color:#64748b;text-align:center;line-height:1;margin-top:1px}
+.tool-btn-wrap{display:flex;flex-direction:column;align-items:center;cursor:pointer}
+.blocklyContextMenu{z-index:99999!important}
+.blocklyWidgetDiv{z-index:99998!important}
+</style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex">
+
+<div class="w-14 h-full bg-[#1e3a8a] flex flex-col justify-between items-center py-3 shadow-lg flex-shrink-0" style="z-index:100">
+    <button id="genBtn" class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white hover:brightness-110 transition flex-shrink-0">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+    </button>
+</div>
+
+<div class="flex-1 h-full relative min-w-0" id="workspace-container" style="z-index:10">
+    <div id="blocklyDiv" class="absolute inset-0"></div>
+</div>
+
+<div class="flex-shrink-0 h-full flex relative" style="z-index:200">
+    <div id="main-menu" class="w-12 h-full flex flex-col items-center py-2 gap-1.5 overflow-y-auto no-scrollbar bg-slate-800/90 backdrop-blur rounded-l-2xl shadow-lg"></div>
+    <div id="sub-menu-area" class="fixed right-12 top-2 bottom-2 w-16 bg-white/95 backdrop-blur rounded-2xl shadow-2xl border border-slate-200 flex flex-col items-center py-3 hidden" style="z-index:199"><div id="sub-items" class="flex-1 w-full overflow-y-auto no-scrollbar flex flex-col items-center gap-1"></div></div>
+    <div id="block-list-area" class="fixed right-[7.5rem] top-2 bottom-2 w-44 bg-white/95 backdrop-blur rounded-2xl shadow-2xl border border-slate-200 flex flex-col p-3 hidden" style="z-index:198"><h3 id="block-list-title" class="font-bold text-xs text-slate-700 mb-2 border-b pb-1.5 flex-shrink-0">积木列表</h3><div id="block-list-items" class="flex-1 overflow-y-auto no-scrollbar flex flex-col gap-1.5"></div></div>
+</div>
+
+<script>
+// 完全基于旧项目(1.0版)可工作的配置 + 92个迷你世界积木 + Lua生成器
+var workspace = Blockly.inject('blocklyDiv', {
+    toolbox: false,
+    trashcan: true,
+    move: { scrollbars: true, drag: true, wheel: true }
+});
+
+/* DATA */
+const BLOCK_DATA_LUA_NATIVE = {
+  "定义函数": [
+    {"type":"func_def","label":"定义函数","lua":"function {{name}}({{params}})\n  {{body}}\nend","mutator":"func_params_mutator","body_labels":["参数"]},
+    {"type":"func_def_return","label":"定义有返回值函数","lua":"function {{name}}({{params}})\n  return {{result}}\nend","mutator":"func_params_mutator","body_labels":["参数"],"inputsInline":false}
+  ],
+  "定义表": [
+    {"type":"table_assign","label":"定义空表变量","lua":"local {{name}} = {}"},
+    {"type":"table_def","label":"定义表变量","lua":"local {{name}} = {{value}}"},
+    {"type":"table_create","label":"空表值 {}","lua":"{}","output":true},
+    {"type":"table_kv","label":"键值对表值","lua":"{\n  [{{key}}] = {{value}}\n}","output":true,"mutator":"table_kv_mutator"},
+    {"type":"table_arr","label":"数组表值","lua":"{ {{item1}}, {{item2}} }","output":true,"mutator":"table_arr_mutator"}
+  ],
+  "定义数值": [{"type":"num_def","label":"定义数值变量","lua":"local {{name}} = {{value}}"},{"type":"num_value","label":"数值","lua":"{{number}}","output":true}],
+  "定义字符串": [{"type":"str_def","label":"定义字符串变量","lua":"local {{name}} = {{value}}"},{"type":"str_value","label":"文本","lua":"\"{{text}}\"","output":true}],
+  "定义布尔值": [{"type":"bool_true","label":"真 true","lua":"true","output":true},{"type":"bool_false","label":"假 false","lua":"false","output":true},{"type":"bool_def","label":"定义布尔变量","lua":"local {{name}} = {{value}}"}],
+  "定义nil/删除": [{"type":"nil_set","label":"赋值为空 nil","lua":"{{name}} = nil"},{"type":"field_del","label":"删除表字段","lua":"{{table}}[{{key}}] = nil"}]
+};
+const BLOCK_DATA_LUA_GLOBAL = {
+  "print输出": [
+    {"type":"print_output","label":"打印输出","lua":"print({{value}})"},
+    {"type":"print_multi","label":"打印多个值","lua":"print({{v1}}, {{v2}})"},
+    {"type":"print_var","label":"调试输出变量","lua":"print(\"{{name}}=\", {{name}})"}
+  ],
+  "逻辑判断": [
+    {"type":"if_block","label":"如果 %1 则","lua":"if {{condition}} then\n  {{body}}\nend","body_labels":["则执行"]},
+    {"type":"if_else_block","label":"如果 %1","lua":"if {{condition}} then\n  {{body}}\nelse\n  {{else_body}}\nend","body_labels":["则执行","否则"]},
+    {"type":"if_elseif_block","label":"如果 %1","lua":"if {{condition1}} then\n  {{body1}}\nelseif {{condition2}} then\n  {{body2}}\nelse\n  {{else_body}}\nend","body_labels":["则执行","否则如果 %1","否则"]},
+    {"type":"if_value","label":"三元选择","lua":"({{condition}} and {{true_val}} or {{false_val}})","output":true}
+  ],
+  "循环": [
+    {"type":"while_block","label":"while %1 循环","lua":"while {{condition}} do\n  {{body}}\nend","body_labels":["执行"]},
+    {"type":"repeat_block","label":"repeat 直到 %1","lua":"repeat\n  {{body}}\nuntil {{condition}}","body_labels":["执行"]},
+    {"type":"for_num_block","label":"for %1 从 %2 到 %3","lua":"for {{name}}={{start}},{{stop}},{{step}} do\n  {{body}}\nend","body_labels":["执行"]},
+    {"type":"for_pairs_block","label":"for %1,%2 in pairs(%3)","lua":"for {{k}},{{v}} in pairs({{t}}) do\n  {{body}}\nend","body_labels":["执行"]},
+    {"type":"for_ipairs_block","label":"for %1,%2 in ipairs(%3)","lua":"for {{i}},{{v}} in ipairs({{t}}) do\n  {{body}}\nend","body_labels":["执行"]},
+    {"type":"break_stmt","label":"break 跳出循环","lua":"break"}
+  ],
+  "运算符": [
+    {"type":"op_add","label":"+","lua":"({{a}} + {{b}})","output":true,"inputsInline":true},
+    {"type":"op_sub","label":"-","lua":"({{a}} - {{b}})","output":true,"inputsInline":true},
+    {"type":"op_mul","label":"×","lua":"({{a}} * {{b}})","output":true,"inputsInline":true},
+    {"type":"op_div","label":"÷","lua":"({{a}} / {{b}})","output":true,"inputsInline":true},
+    {"type":"op_pow","label":"^","lua":"({{a}} ^ {{b}})","output":true,"inputsInline":true},
+    {"type":"op_mod","label":"% 取余","lua":"({{a}} % {{b}})","output":true,"inputsInline":true},
+    {"type":"op_concat","label":".. 连接","lua":"({{a}} .. {{b}})","output":true,"inputsInline":true},
+    {"type":"op_neg","label":"- 取负","lua":"(-{{value}})","output":true},
+    {"type":"op_len","label":"# 取长度","lua":"(#{{value}})","output":true},
+    {"type":"logic_and","label":"and 并且","lua":"({{a}} and {{b}})","output":true,"inputsInline":true},
+    {"type":"logic_or","label":"or 或者","lua":"({{a}} or {{b}})","output":true,"inputsInline":true},
+    {"type":"logic_not","label":"not 取反","lua":"(not {{value}})","output":true}
+  ],
+  "比较符": [
+    {"type":"cmp_eq","label":"= 等于","lua":"({{a}} == {{b}})","output":true,"inputsInline":true},
+    {"type":"cmp_ne","label":"≠ 不等于","lua":"({{a}} ~= {{b}})","output":true,"inputsInline":true},
+    {"type":"cmp_lt","label":"< 小于","lua":"({{a}} < {{b}})","output":true,"inputsInline":true},
+    {"type":"cmp_gt","label":"> 大于","lua":"({{a}} > {{b}})","output":true,"inputsInline":true},
+    {"type":"cmp_le","label":"≤ 小于等于","lua":"({{a}} <= {{b}})","output":true,"inputsInline":true},
+    {"type":"cmp_ge","label":"≥ 大于等于","lua":"({{a}} >= {{b}})","output":true,"inputsInline":true}
+  ],
+  "类型转换": [
+    {"type":"to_string","label":"转为字符串 tostring","lua":"tostring({{value}})","output":true},
+    {"type":"to_number","label":"转为数值 tonumber","lua":"tonumber({{value}})","output":true},
+    {"type":"type_of","label":"获取类型 type","lua":"type({{value}})","output":true}
+  ],
+  "变量操作": [
+    {"type":"var_local","label":"定义局部变量","lua":"local {{name}} = {{value}}"},
+    {"type":"var_assign","label":"赋值","lua":"{{name}} = {{value}}"},
+    {"type":"var_multi_assign","label":"多重赋值","lua":"{{name1}}, {{name2}} = {{val1}}, {{val2}}"},
+    {"type":"var_global","label":"定义全局变量","lua":"{{name}} = {{value}}"}
+  ]
+};
+const BLOCK_DATA_LUA_LIB = {
+  "数学库": [
+    {"type":"math_abs","label":"绝对值 abs","lua":"math.abs({{x}})","output":true},{"type":"math_ceil","label":"向上取整 ceil","lua":"math.ceil({{x}})","output":true},
+    {"type":"math_floor","label":"向下取整 floor","lua":"math.floor({{x}})","output":true},{"type":"math_max","label":"最大值 max","lua":"math.max({{a}}, {{b}})","output":true},
+    {"type":"math_min","label":"最小值 min","lua":"math.min({{a}}, {{b}})","output":true},{"type":"math_sqrt","label":"平方根 sqrt","lua":"math.sqrt({{x}})","output":true},
+    {"type":"math_random_int","label":"随机整数","lua":"math.random({{min}}, {{max}})","output":true},{"type":"math_random","label":"随机小数 0~1","lua":"math.random()","output":true},
+    {"type":"math_randomseed","label":"设置随机种子","lua":"math.randomseed({{seed}})"},{"type":"math_pi","label":"圆周率 π","lua":"math.pi","output":true},
+    {"type":"math_sin","label":"正弦 sin","lua":"math.sin({{x}})","output":true},{"type":"math_cos","label":"余弦 cos","lua":"math.cos({{x}})","output":true},
+    {"type":"math_tan","label":"正切 tan","lua":"math.tan({{x}})","output":true},{"type":"math_rad","label":"角度→弧度 rad","lua":"math.rad({{deg}})","output":true},
+    {"type":"math_deg","label":"弧度→角度 deg","lua":"math.deg({{rad}})","output":true},{"type":"math_exp","label":"e的次幂 exp","lua":"math.exp({{x}})","output":true},
+    {"type":"math_log","label":"自然对数 log","lua":"math.log({{x}})","output":true},{"type":"math_pow","label":"幂运算 pow","lua":"math.pow({{base}}, {{exp}})","output":true}
+  ],
+  "字符串库": [
+    {"type":"str_len","label":"字符串长度 len","lua":"string.len({{s}})","output":true},{"type":"str_sub","label":"截取子串 sub","lua":"string.sub({{s}}, {{start}}, {{end}})","output":true},
+    {"type":"str_find","label":"查找文本 find","lua":"string.find({{s}}, {{pattern}})","output":true},{"type":"str_gsub","label":"替换文本 gsub","lua":"string.gsub({{s}}, {{pattern}}, {{repl}})","output":true},
+    {"type":"str_format","label":"格式化字符串 format","lua":"string.format({{fmt}}, {{v1}})","output":true},{"type":"str_upper","label":"转大写 upper","lua":"string.upper({{s}})","output":true},
+    {"type":"str_lower","label":"转小写 lower","lua":"string.lower({{s}})","output":true},{"type":"str_reverse","label":"反转 reverse","lua":"string.reverse({{s}})","output":true},
+    {"type":"str_rep","label":"重复字符 rep","lua":"string.rep({{s}}, {{n}})","output":true},{"type":"str_byte","label":"字符→编码 byte","lua":"string.byte({{s}})","output":true},
+    {"type":"str_char","label":"编码→字符 char","lua":"string.char({{code}})","output":true},{"type":"str_match","label":"匹配捕获 match","lua":"string.match({{s}}, {{pattern}})","output":true}
+  ],
+  "表操作库": [
+    {"type":"table_insert","label":"表插入(末尾) insert","lua":"table.insert({{t}}, {{value}})"},{"type":"table_insert_at","label":"表插入(指定位置)","lua":"table.insert({{t}}, {{pos}}, {{value}})"},
+    {"type":"table_remove","label":"表删除(末尾) remove","lua":"table.remove({{t}})"},{"type":"table_remove_at","label":"表删除(指定位置)","lua":"table.remove({{t}}, {{pos}})"},
+    {"type":"table_sort","label":"表排序 sort","lua":"table.sort({{t}})"},{"type":"table_concat","label":"表拼接 concat","lua":"table.concat({{t}}, {{sep}})","output":true},
+    {"type":"table_len","label":"获取表长度 #","lua":"#{{t}}","output":true},{"type":"table_is_empty","label":"表是否为空","lua":"(next({{t}}) == nil)","output":true}
+  ]
+};
+const BLOCK_DATA_LISTENER = {};
+const BLOCK_DATA_FUNCTION = {};
+const BLOCK_DATA_ENUM = {};
+const BLOCK_DATA_ID = {};
+const BLOCK_DATA_FAVORITE = {};
+
+const DATA_MAP = {
+    "Lua原生":BLOCK_DATA_LUA_NATIVE,"Lua全局":BLOCK_DATA_LUA_GLOBAL,"Lua库":BLOCK_DATA_LUA_LIB,
+    "监听事件":BLOCK_DATA_LISTENER,"函数库":BLOCK_DATA_FUNCTION,"枚举库":BLOCK_DATA_ENUM,
+    "ID库":BLOCK_DATA_ID,"收藏代码":BLOCK_DATA_FAVORITE
+};
+const mainCategories = [
+    {name:"Lua原生",color:"#f97316"},{name:"Lua全局",color:"#eab308"},{name:"Lua库",color:"#06b6d4"},
+    {name:"监听事件",color:"#ef4444"},{name:"函数库",color:"#22c55e"},{name:"枚举库",color:"#a855f7"},
+    {name:"ID库",color:"#94a3b8"},{name:"收藏代码",color:"#f59e0b"}
+];
+const subCategoriesMap = {
+    "Lua原生":["定义函数","定义表","定义数值","定义字符串","定义布尔值","定义nil/删除"],
+    "Lua全局":["print输出","逻辑判断","循环","运算符","比较符","类型转换","变量操作"],
+    "Lua库":["数学库","字符串库","表操作库"],
+    "监听事件":["玩家事件","方块事件","世界事件","角色事件","投掷物事件","界面事件","计时器事件","游戏事件","输入事件","生物事件"],
+    "函数库":["玩家函数","方块函数","世界函数","角色函数","投掷物函数","界面函数","背包函数","容器函数","生物函数"],
+    "枚举库":["地形枚举","生物类型枚举","方向枚举","颜色枚举","音效枚举","粒子枚举","游戏模式枚举","天气枚举","难度枚举","交互类型枚举"],
+    "ID库":["方块ID","物品ID","生物ID","道具ID","材质ID","特效ID"],
+    "收藏代码":["我的收藏","常用片段","历史记录"]
+};
+const CAT_COLORS = {"Lua原生":"#f97316","Lua全局":"#eab308","Lua库":"#06b6d4","监听事件":"#ef4444","函数库":"#22c55e","枚举库":"#a855f7","ID库":"#94a3b8","收藏代码":"#f59e0b"};
+
+// ---- 辅助块 ----
+Blockly.defineBlocksWithJsonArray([
+    {type:'pair',message0:'键 %1 值 %2',args0:[{type:'field_input',name:'KEY',text:'key'},{type:'input_value',name:'VALUE'}],previousStatement:null,nextStatement:null,colour:'#f97316',inputsInline:true},
+    {type:'list_item',message0:'元素 %1',args0:[{type:'input_value',name:'VALUE'}],previousStatement:null,nextStatement:null,colour:'#f97316'},
+    {type:'table_kv_container',message0:'键值对列表 %1',args0:[{type:'input_statement',name:'STACK'}],colour:'#f97316'},
+    {type:'table_arr_container',message0:'元素列表 %1',args0:[{type:'input_statement',name:'STACK'}],colour:'#f97316'},
+    {type:'param_item',message0:'参数 %1',args0:[{type:'field_input',name:'NAME',text:'param'}],previousStatement:null,nextStatement:null,colour:'#f97316'},
+    {type:'func_params_container',message0:'参数列表 %1',args0:[{type:'input_statement',name:'STACK'}],colour:'#f97316'}
+]);
+
+// ---- table_kv_mutator ----
+Blockly.Extensions.registerMutator('table_kv_mutator', {
+    decompose: function(ws){var b=this;var c=ws.newBlock('table_kv_container');c.initSvg();c.render();var conn=c.getInput('STACK').connection;var i=0;while(b.getInput('KEY_'+i))i++;for(var j=0;j<i;j++){var p=ws.newBlock('pair');p.initSvg();p.render();var f=b.getInput('KEY_'+j).fieldRow[0];if(f)p.setFieldValue(f.getValue(),'KEY');conn.connect(p.previousConnection);conn=p.nextConnection;}if(i===0){var p=ws.newBlock('pair');p.initSvg();p.render();conn.connect(p.previousConnection);}return c;},
+    compose: function(c){var b=this;var i=0;while(b.getInput('KEY_'+i)){b.removeInput('KEY_'+i);b.removeInput('VAL_'+i);i++;}if(b.getInput('key'))b.removeInput('key');if(b.getInput('value'))b.removeInput('value');var ch=c.getInputTargetBlock('STACK');var idx=0;while(ch){if(ch.type==='pair'){b.appendDummyInput('KEY_'+idx).appendField(new Blockly.FieldTextInput(ch.getFieldValue('KEY')||'key'),'KEY_'+idx);var vi=b.appendValueInput('VAL_'+idx).setCheck(null).appendField('=');var cv=ch.getInputTargetBlock('VALUE');if(cv){var st=Blockly.serialization.blocks.save(cv,{addCoordinates:true});if(st){var cl=Blockly.serialization.blocks.append(st,workspace);if(cl&&cl.outputConnection)vi.connection.connect(cl.outputConnection);}}idx++;}ch=ch.getNextBlock();}if(idx===0){b.appendDummyInput('KEY_0').appendField(new Blockly.FieldTextInput('key'),'KEY_0');b.appendValueInput('VAL_0').setCheck(null).appendField('=');}b.render();if(workspace)workspace.render();},
+    saveExtraState: function(){var b=this;var p=[];var v=[];var i=0;while(b.getInput('KEY_'+i)){var f=b.getInput('KEY_'+i).fieldRow[0];p.push({key:f?f.getValue():'key'});var t=b.getInput('VAL_'+i).connection.targetBlock();v.push(t?Blockly.serialization.blocks.save(t,{addCoordinates:true}):null);i++;}return{pairs:p,vals:v};},
+    loadExtraState: function(s){if(!s||!s.pairs)return;var b=this;var i=0;while(b.getInput('KEY_'+i)){b.removeInput('KEY_'+i);b.removeInput('VAL_'+i);i++;}s.pairs.forEach(function(p,idx){b.appendDummyInput('KEY_'+idx).appendField(new Blockly.FieldTextInput(p.key||'key'),'KEY_'+idx);var vi=b.appendValueInput('VAL_'+idx).setCheck(null).appendField('=');if(s.vals&&s.vals[idx]){var cl=Blockly.serialization.blocks.append(s.vals[idx],workspace);if(cl&&cl.outputConnection)vi.connection.connect(cl.outputConnection);}});b.render();}
+}, null, ['pair']);
+
+// ---- table_arr_mutator ----
+Blockly.Extensions.registerMutator('table_arr_mutator', {
+    decompose: function(ws){var b=this;var c=ws.newBlock('table_arr_container');c.initSvg();c.render();var conn=c.getInput('STACK').connection;var i=0;while(b.getInput('ITEM_'+i))i++;for(var j=0;j<i;j++){var it=ws.newBlock('list_item');it.initSvg();it.render();conn.connect(it.previousConnection);conn=it.nextConnection;}if(i===0){var it1=ws.newBlock('list_item');it1.initSvg();it1.render();var it2=ws.newBlock('list_item');it2.initSvg();it2.render();conn.connect(it1.previousConnection);it1.nextConnection.connect(it2.previousConnection);}return c;},
+    compose: function(c){var b=this;var i=0;while(b.getInput('ITEM_'+i)){b.removeInput('ITEM_'+i);i++;}if(b.getInput('item1'))b.removeInput('item1');if(b.getInput('item2'))b.removeInput('item2');var ch=c.getInputTargetBlock('STACK');var idx=0;while(ch){if(ch.type==='list_item'){var ii=b.appendValueInput('ITEM_'+idx).setCheck(null).appendField('['+idx+']');var cv=ch.getInputTargetBlock('VALUE');if(cv){var st=Blockly.serialization.blocks.save(cv,{addCoordinates:true});if(st){var cl=Blockly.serialization.blocks.append(st,workspace);if(cl&&cl.outputConnection)ii.connection.connect(cl.outputConnection);}}idx++;}ch=ch.getNextBlock();}if(idx<2){for(var j=idx;j<2;j++)b.appendValueInput('ITEM_'+j).setCheck(null).appendField('['+j+']');}b.render();if(workspace)workspace.render();},
+    saveExtraState: function(){var b=this;var c=0;while(b.getInput('ITEM_'+c))c++;var v=[];for(var j=0;j<c;j++){var t=b.getInput('ITEM_'+j).connection.targetBlock();v.push(t?Blockly.serialization.blocks.save(t,{addCoordinates:true}):null);}return{count:c,vals:v};},
+    loadExtraState: function(s){if(!s||!s.count)return;var b=this;var i=0;while(b.getInput('ITEM_'+i)){b.removeInput('ITEM_'+i);i++;}for(var j=0;j<s.count;j++){var ii=b.appendValueInput('ITEM_'+j).setCheck(null).appendField('['+j+']');if(s.vals&&s.vals[j]){var cl=Blockly.serialization.blocks.append(s.vals[j],workspace);if(cl&&cl.outputConnection)ii.connection.connect(cl.outputConnection);}}b.render();}
+}, null, ['list_item']);
+
+// ---- func_params_mutator ----
+Blockly.Extensions.registerMutator('func_params_mutator', {
+    decompose: function(ws){var b=this;var c=ws.newBlock('func_params_container');c.initSvg();c.render();var conn=c.getInput('STACK').connection;var i=0;while(b.getInput('PARAM_'+i))i++;if(i===0){var it=ws.newBlock('param_item');it.initSvg();it.render();it.setFieldValue('param','NAME');conn.connect(it.previousConnection);}else for(var j=0;j<i;j++){var it=ws.newBlock('param_item');it.initSvg();it.render();var f=b.getInput('PARAM_'+j).fieldRow[0];if(f)it.setFieldValue(f.getValue(),'NAME');conn.connect(it.previousConnection);conn=it.nextConnection;}return c;},
+    compose: function(c){var b=this;var i=0;while(b.getInput('PARAM_'+i)){b.removeInput('PARAM_'+i);i++;}var ch=c.getInputTargetBlock('STACK');var names=[];while(ch){if(ch.type==='param_item')names.push(ch.getFieldValue('NAME')||'param');ch=ch.getNextBlock();}if(names.length===0)names.push('param');for(var j=0;j<names.length;j++)b.appendDummyInput('PARAM_'+j).appendField(new Blockly.FieldTextInput(names[j]),'PARAM_'+j);b.render();if(workspace)workspace.render();},
+    saveExtraState: function(){var b=this;var p=[];var i=0;while(b.getInput('PARAM_'+i)){var f=b.getInput('PARAM_'+i).fieldRow[0];p.push(f?f.getValue():'param');i++;}return{params:p};},
+    loadExtraState: function(s){if(!s||!s.params||!s.params.length)return;var b=this;var i=0;while(b.getInput('PARAM_'+i)){b.removeInput('PARAM_'+i);i++;}s.params.forEach(function(n,idx){b.appendDummyInput('PARAM_'+idx).appendField(new Blockly.FieldTextInput(n),'PARAM_'+idx);});b.render();}
+}, null, ['param_item']);
+
+// ---- 注册积木 ----
+var MUTATOR_PH_MAP = {"func_params_mutator":["params"],"table_kv_mutator":["key","value"],"table_arr_mutator":["item1","item2"]};
+var jsonDefs = [];
+for (var cn in DATA_MAP) {
+    var color = CAT_COLORS[cn] || '#888888';
+    var dataObj = DATA_MAP[cn];
+    for (var sn in dataObj) {
+        dataObj[sn].forEach(function(block) {
+            var tn = block.type;
+            if (Blockly.Blocks[tn]) return;
+            var isValue = block.output === true;
+            var phs = block.lua.match(/\{\{(\w+)\}\}/g);
+            if (!phs) phs = []; else phs = phs.map(function(m){return m.match(/\{\{(\w+)\}\}/)[1];});
+            var bodyPhs = phs.filter(function(p){return p.indexOf('body')!==-1;});
+            var bodyPh = bodyPhs.length>0 ? bodyPhs[0] : null;
+            var extraBodyPhs = bodyPhs.slice(1);
+            var condPhs = phs.filter(function(p){return p.indexOf('condition')!==-1;});
+            var mutatorManaged = (block.mutator && MUTATOR_PH_MAP[block.mutator]) ? MUTATOR_PH_MAP[block.mutator] : [];
+            var normalPhs = phs.filter(function(p){return p.indexOf('body')===-1&&p.indexOf('condition')===-1&&mutatorManaged.indexOf(p)===-1;});
+            var defaultInline = !bodyPh && condPhs.length === 0;
+            if (block.hasOwnProperty('inputsInline')) defaultInline = block.inputsInline;
+            var def = {type:tn, colour:color, inputsInline:defaultInline};
+            if (block.mutator) def.mutator = block.mutator;
+            if (isValue) def.output = null; else { def.previousStatement = null; def.nextStatement = null; }
+            var msg = [block.label];
+            var args = [];
+            normalPhs.forEach(function(ph) {
+                var idx = args.length + 1;
+                msg.push('%'+idx);
+                var t = (['name','key','text','table','number'].indexOf(ph) !== -1) ? 'field_input' : 'input_value';
+                var arg = {type:t, name:ph};
+                if (t === 'field_input') arg.text = ph;
+                args.push(arg);
+            });
+            condPhs.forEach(function(cph){
+                var idx = args.length+1; msg.push('%'+idx);
+                args.push({type:'input_value',name:cph,check:null});
+            });
+            if (args.length > 0) { def.message0 = msg.join(' '); def.args0 = args; } else def.message0 = block.label;
+            var bodyLabels = block.body_labels || [];
+            if (bodyPh) {
+                var bl0 = bodyLabels[0] || '';
+                def.message1 = bl0 ? (bl0+' %1') : '%1';
+                def.args1 = [{type:'input_statement',name:bodyPh}];
+            }
+            extraBodyPhs.forEach(function(bp, bi){
+                var bl = bodyLabels[bi+1] || '';
+                def['message'+(bi+2)] = bl ? (bl+' %1') : '%1';
+                def['args'+(bi+2)] = [{type:'input_statement',name:bp}];
+            });
+            jsonDefs.push(def);
+        });
+    }
+}
+Blockly.defineBlocksWithJsonArray(jsonDefs);
+console.log('✅ 已注册 ' + jsonDefs.length + ' 个积木');
+
+// ---- Lua生成器(基于内置Blockly.Lua, 只注册自定义积木类型) ----
+(function(){
+    // Blockly.Lua 由 lua_compressed.js 提供
+    // 只需为我们的自定义积木注册生成器
+
+    var ALL_DEFS = [];
+    for (var cn in DATA_MAP) { var d = DATA_MAP[cn]; for (var sn in d) { var bl = d[sn]; for (var k=0;k<bl.length;k++) ALL_DEFS.push(bl[k]); } }
+
+    function isField(ph) { return ['name','key','text','table','number'].indexOf(ph) !== -1; }
+
+    Blockly.Lua['func_def'] = function(block) {
+        var name = block.getFieldValue('name') || 'myFunc';
+        var params = []; var i = 0;
+        while (block.getField('PARAM_' + i)) { params.push(block.getFieldValue('PARAM_' + i)); i++; }
+        if (!params.length) params.push('param');
+        var body = Blockly.Lua.statementToCode(block, 'body');
+        if (!body) body = '  -- TODO\n';
+        return 'function ' + name + '(' + params.join(', ') + ')\n' + body + 'end\n';
+    };
+    Blockly.Lua['func_def_return'] = function(block) {
+        var name = block.getFieldValue('name') || 'myFunc';
+        var params = []; var i = 0;
+        while (block.getField('PARAM_' + i)) { params.push(block.getFieldValue('PARAM_' + i)); i++; }
+        if (!params.length) params.push('param');
+        var result = Blockly.Lua.valueToCode(block, 'result', Blockly.Lua.ORDER_NONE) || 'nil';
+        return 'function ' + name + '(' + params.join(', ') + ')\n  return ' + result + '\nend\n';
+    };
+    Blockly.Lua['table_kv'] = function(block) {
+        var pairs = []; var i = 0;
+        while (block.getInput('KEY_' + i)) { var key = block.getFieldValue('KEY_' + i) || 'key'; var val = Blockly.Lua.valueToCode(block, 'VAL_' + i, Blockly.Lua.ORDER_NONE) || 'nil'; pairs.push('  ["' + key + '"] = ' + val); i++; }
+        if (!pairs.length) return ['{}', Blockly.Lua.ORDER_ATOMIC];
+        return ['{\n' + pairs.join(',\n') + '\n}', Blockly.Lua.ORDER_ATOMIC];
+    };
+    Blockly.Lua['table_arr'] = function(block) {
+        var items = []; var i = 0;
+        while (block.getInput('ITEM_' + i)) { var val = Blockly.Lua.valueToCode(block, 'ITEM_' + i, Blockly.Lua.ORDER_NONE) || 'nil'; items.push(val); i++; }
+        return ['{ ' + items.join(', ') + ' }', Blockly.Lua.ORDER_ATOMIC];
+    };
+
+    // 模板生成器
+    ALL_DEFS.forEach(function(def) {
+        if (Blockly.Lua[def.type]) return;
+        var tpl = def.lua, out = def.output === true;
+        var mm = (def.mutator && MUTATOR_PH_MAP[def.mutator]) ? MUTATOR_PH_MAP[def.mutator] : [];
+        var phs = tpl.match(/\{\{(\w+)\}\}/g); if (!phs) phs = []; else phs = phs.map(function(m){return m.match(/\{\{(\w+)\}\}/)[1];});
+        phs = phs.filter(function(p){return mm.indexOf(p)===-1;});
+        Blockly.Lua[def.type] = function(block) {
+            var code = tpl;
+            phs.forEach(function(ph) {
+                var v;
+                if (ph.indexOf('body') !== -1) v = Blockly.Lua.statementToCode(block, ph);
+                else if (ph.indexOf('condition') !== -1) v = Blockly.Lua.valueToCode(block, ph, Blockly.Lua.ORDER_NONE) || 'false';
+                else if (isField(ph)) v = block.getFieldValue(ph) || '';
+                else v = Blockly.Lua.valueToCode(block, ph, Blockly.Lua.ORDER_NONE) || 'nil';
+                code = code.split('{{' + ph + '}}').join(v);
+            });
+            if (out) return [code, Blockly.Lua.ORDER_ATOMIC];
+            return code + '\n';
+        };
+    });
+    console.log('✅ Lua生成器就绪 (' + ALL_DEFS.length + '类型)');
+})();
+
+// ---- 添加积木 ----
+function addBlockToWorkspace(tn) {
+    try {
+        if (!Blockly.Blocks[tn]) { showToast('❌ 未定义:'+tn); return; }
+        var vp = workspace.getMetrics();
+        var x = vp.contentLeft + vp.viewWidth/2 + (Math.random()-0.5)*100;
+        var y = vp.contentTop + vp.viewHeight/2 + (Math.random()-0.5)*100;
+        var b = workspace.newBlock(tn); b.initSvg(); b.render(); b.moveBy(x-50,y-50);
+        workspace.render(); showToast('✅ 已添加');
+    } catch(e) { console.error(e); showToast('❌ 添加失败: '+tn); }
+}
+
+// ---- UI ----
+var mainMenuEl = document.getElementById('main-menu');
+var subArea = document.getElementById('sub-menu-area');
+var listArea = document.getElementById('block-list-area');
+var subItemsContainer = document.getElementById('sub-items');
+var listItemsContainer = document.getElementById('block-list-items');
+var blockListTitle = document.getElementById('block-list-title');
+
+function clearMainActive() { document.querySelectorAll('.main-item').forEach(function(e){e.classList.remove('main-active');}); }
+function clearSubActive() { document.querySelectorAll('.sub-btn').forEach(function(e){e.classList.remove('sub-active');}); }
+
+function renderBlocks(subName, catName) {
+    blockListTitle.innerText = subName;
+    listItemsContainer.innerHTML = '';
+    var d = DATA_MAP[catName];
+    if (!d || !d[subName] || !d[subName].length) { listItemsContainer.innerHTML = '<div class="text-xs text-slate-400 text-center py-4 italic">暂无积木</div>'; return; }
+    d[subName].forEach(function(b) {
+        var btn = document.createElement('button');
+        btn.className = 'block-item';
+        btn.innerHTML = '<span class="w-2 h-2 rounded-full flex-shrink-0" style="background:'+(CAT_COLORS[catName]||'#94a3b8')+'"></span> '+b.label.split(' %')[0];
+        btn.addEventListener('click', function(e) { e.stopPropagation(); addBlockToWorkspace(b.type); });
+        listItemsContainer.appendChild(btn);
+    });
+}
+
+function renderMainMenu() {
+    mainMenuEl.innerHTML = '';
+    mainCategories.forEach(function(cat) {
+        var btn = document.createElement('div');
+        btn.className = 'cursor-pointer flex flex-col items-center justify-center w-10 h-10 rounded-xl transition-all main-item flex-shrink-0';
+        btn.style.background = cat.color + '22';
+        btn.innerHTML = '<div class="w-5 h-5 rounded flex items-center justify-center" style="background:'+cat.color+'33"><svg class="w-3.5 h-3.5" fill="'+cat.color+'" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="3"/></svg></div><span class="text-[7px] text-slate-300 mt-0.5 leading-tight text-center">'+cat.name+'</span>';
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (btn.classList.contains('main-active')) { clearMainActive(); subArea.classList.add('hidden'); listArea.classList.add('hidden'); return; }
+            clearMainActive(); btn.classList.add('main-active');
+            subArea.classList.remove('hidden'); listArea.classList.add('hidden');
+            var subs = subCategoriesMap[cat.name] || [];
+            subItemsContainer.innerHTML = '';
+            if (!subs.length) { var d = document.createElement('div'); d.className = 'text-[9px] text-slate-400 text-center mt-4'; d.innerText = '无分类'; subItemsContainer.appendChild(d); }
+            else { subs.forEach(function(s) {
+                var sb = document.createElement('div');
+                sb.className = 'sub-btn cursor-pointer flex flex-col items-center justify-center w-10 h-10 rounded-xl text-slate-600 transition-all flex-shrink-0 mb-1';
+                sb.innerHTML = '<svg class="w-4 h-4 mb-0.5 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/></svg><span class="text-[7px] font-bold text-center leading-tight">'+s+'</span>';
+                sb.addEventListener('click', function(e2) { e2.stopPropagation(); clearSubActive(); sb.classList.add('sub-active'); listArea.classList.remove('hidden'); renderBlocks(s, cat.name); });
+                subItemsContainer.appendChild(sb);
+            }); }
+        });
+        mainMenuEl.appendChild(btn);
+    });
+}
+renderMainMenu();
+
+// ---- 代码生成按钮(唯一功能按钮) ----
+document.getElementById('genBtn').addEventListener('click',function(){
+    try {
+        var code = Blockly.Lua.workspaceToCode(workspace);
+        if (!code || !code.trim()) { showToast('⚠️ 请先添加积木'); return; }
+        showLuaOutput(code);
+    } catch(e) { console.error(e); showToast('❌ 生成失败'); }
+});
+
+// ---- Lua弹窗 ----
+function showLuaOutput(code) {
+    var old = document.getElementById('lua-popup'); if (old) old.remove();
+    var div = document.createElement('div'); div.id = 'lua-popup';
+    div.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)';
+    div.innerHTML = '<div style="background:#1e293b;border:1px solid #334155;border-radius:16px;width:90vw;max-width:600px;max-height:80vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.5)">'
+        +'<div style="padding:12px 16px;border-bottom:1px solid #334155;display:flex;justify-content:space-between"><span style="color:#e2e8f0;font-weight:bold;font-size:14px">📄 Lua 代码</span><button id="lua-close1" style="color:#94a3b8;background:none;border:none;font-size:20px;cursor:pointer">&times;</button></div>'
+        +'<div style="padding:16px;flex:1;overflow:hidden"><textarea id="lua-txt" readonly style="width:100%;min-height:200px;background:#0f172a;color:#4ade80;border:1px solid #334155;border-radius:8px;padding:12px;font-family:monospace;font-size:13px;resize:none;outline:none;white-space:pre;overflow:auto"></textarea></div>'
+        +'<div style="padding:12px 16px;border-top:1px solid #334155;display:flex;gap:8px;justify-content:flex-end"><button id="lua-copy" style="padding:8px 16px;border-radius:8px;font-size:13px;border:none;cursor:pointer;font-weight:bold;background:#38bdf8;color:#0f172a">📋 复制</button><button id="lua-close2" style="padding:8px 16px;border-radius:8px;font-size:13px;border:none;cursor:pointer;font-weight:bold;background:#334155;color:#e2e8f0">关闭</button></div>'
+        +'</div>';
+    document.body.appendChild(div);
+    var ta = document.getElementById('lua-txt'); ta.value = code;
+    function close() { var el = document.getElementById('lua-popup'); if (el) el.remove(); }
+    document.getElementById('lua-close1').onclick = close;
+    document.getElementById('lua-close2').onclick = close;
+    div.addEventListener('click', function(e) { if (e.target === div) close(); });
+    document.getElementById('lua-copy').onclick = function() { ta.select(); ta.setSelectionRange(0, 99999); try { document.execCommand('copy'); showToast('✅ 已复制'); } catch(e) { showToast('❌ 复制失败'); } };
+    function onEsc(e) { if (e.key === 'Escape') { close(); document.removeEventListener('keydown', onEsc); } }
+    document.addEventListener('keydown', onEsc);
+    setTimeout(function() { ta.focus(); }, 100);
+}
+
+function showToast(m){var t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.style.cssText='position:fixed;bottom:60px;left:50%;transform:translateX(-50%);background:rgba(30,41,59,0.9);color:white;padding:8px 20px;border-radius:12px;font-size:13px;z-index:99999;transition:all 0.3s;opacity:0;pointer-events:none;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);white-space:nowrap';document.body.appendChild(t);}t.textContent=m;t.style.opacity='1';clearTimeout(t._timer);t._timer=setTimeout(function(){t.style.opacity='0';},1500);}
+console.log('🚀 精简版: 旧项目配置 + 92积木 + 内置Lua生成器');
+</script>
+</body>
+</html>
