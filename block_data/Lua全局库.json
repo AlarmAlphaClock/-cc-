@@ -1,0 +1,507 @@
+{
+  "blocks": {
+    "print输出": [
+      {
+        "type": "print_output",
+        "label": "打印输出",
+        "lua": "print({{value}})"
+      },
+      {
+        "type": "print_multi",
+        "label": "打印多个值",
+        "lua": "MUTATOR",
+        "mutator": "print_multi_mutator"
+      },
+      {
+        "type": "print_var",
+        "label": "调试输出变量",
+        "lua": "print(\"{{name}}=\", {{name}})"
+      },
+      {
+        "type": "print_error",
+        "label": "打印错误信息",
+        "lua": "printError({{value}})"
+      }
+    ],
+    "其他操作": [
+      {
+        "type": "to_string",
+        "label": "转为字符串 tostring",
+        "lua": "tostring({{value}})",
+        "output": true
+      },
+      {
+        "type": "to_number",
+        "label": "转为数值 tonumber",
+        "lua": "tonumber({{value}})",
+        "output": true
+      },
+      {
+        "type": "op_len",
+        "label": "# 取长度",
+        "lua": "(#{{value}})",
+        "output": true
+      },
+      {
+        "type": "type_of",
+        "label": "获取类型 type",
+        "lua": "type({{value}})",
+        "output": true
+      },
+      {
+        "type": "json_decode",
+        "label": "JSON解码 json.decode",
+        "lua": "json.decode({{data}})",
+        "output": true
+      },
+      {
+        "type": "json_encode",
+        "label": "JSON编码 json.encode",
+        "lua": "json.encode({{data}})",
+        "output": true
+      },
+      {
+        "type": "get_world",
+        "label": "获取世界对象 GetWorld",
+        "lua": "GetWorld()",
+        "output": true
+      },
+      {
+        "type": "class_def",
+        "label": "定义类 Class",
+        "lua": "Class({{name}}, {{super}}, {{issingle}})",
+        "output": true
+      },
+      {
+        "type": "instance_create",
+        "label": "创建类实例 Instance",
+        "lua": "Instance({{classname}})",
+        "output": true
+      },
+      {
+        "type": "get_inst",
+        "label": "获取类单例 GetInst",
+        "lua": "GetInst({{classname}})",
+        "output": true
+      }
+    ],
+    "流程控制": [
+      {
+        "type": "if_block",
+        "label": "如果",
+        "lua": "MUTATOR",
+        "mutator": "if_mutator"
+      },
+      {
+        "type": "if_value",
+        "label": "三元选择",
+        "lua": "({{condition}} and {{true_val}} or {{false_val}})",
+        "output": true
+      },
+      {
+        "type": "logic_and",
+        "label": "and 并且",
+        "lua": "({{a}} and {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "logic_or",
+        "label": "or 或者",
+        "lua": "({{a}} or {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "logic_not",
+        "label": "not 取反",
+        "lua": "(not {{value}})",
+        "output": true
+      },
+      {
+        "type": "while_block",
+        "label": "while 循环",
+        "lua": "while {{condition}} do\n  {{body}}\nend",
+        "body_labels": [
+          "执行"
+        ]
+      },
+      {
+        "type": "repeat_block",
+        "label": "repeat 直到",
+        "lua": "repeat\n  {{body}}\nuntil {{condition}}",
+        "body_labels": [
+          "执行"
+        ]
+      },
+      {
+        "type": "for_num_block",
+        "label": "for 数值循环",
+        "lua": "for {{i}}={{start}},{{stop}},{{step}} do\n  {{body}}\nend",
+        "body_labels": [
+          "执行"
+        ],
+        "inputsInline": true
+      },
+      {
+        "type": "for_pairs_block",
+        "label": "for 遍历 pairs",
+        "lua": "for {{k}},{{v}} in pairs({{t}}) do\n  {{body}}\nend",
+        "body_labels": [
+          "执行"
+        ],
+        "inputsInline": true
+      },
+      {
+        "type": "for_ipairs_block",
+        "label": "for 遍历 ipairs",
+        "lua": "for {{i}},{{v}} in ipairs({{t}}) do\n  {{body}}\nend",
+        "body_labels": [
+          "执行"
+        ],
+        "inputsInline": true
+      },
+      {
+        "type": "break_stmt",
+        "label": "break 跳出循环",
+        "lua": "break"
+      }
+    ],
+    "数值操作": [
+      {
+        "type": "op_add",
+        "label": "+",
+        "lua": "({{a}} + {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "op_sub",
+        "label": "-",
+        "lua": "({{a}} - {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "op_mul",
+        "label": "×",
+        "lua": "({{a}} * {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "op_div",
+        "label": "÷",
+        "lua": "({{a}} / {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "math_adv_op",
+        "label": "高级四则运算",
+        "lua": "MUTATOR",
+        "output": true,
+        "mutator": "math_adv_mutator"
+      },
+      {
+        "type": "cmp_eq",
+        "label": "= 等于",
+        "lua": "({{a}} == {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "cmp_ne",
+        "label": "≠ 不等于",
+        "lua": "({{a}} ~= {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "cmp_lt",
+        "label": "< 小于",
+        "lua": "({{a}} < {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "cmp_gt",
+        "label": "> 大于",
+        "lua": "({{a}} > {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "cmp_le",
+        "label": "≤ 小于等于",
+        "lua": "({{a}} <= {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "cmp_ge",
+        "label": "≥ 大于等于",
+        "lua": "({{a}} >= {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "op_mod",
+        "label": "% 取余",
+        "lua": "({{a}} % {{b}})",
+        "output": true,
+        "inputsInline": true
+      },
+      {
+        "type": "op_neg",
+        "label": "- 取负",
+        "lua": "(-{{value}})",
+        "output": true
+      },
+      {
+        "type": "op_pow",
+        "label": "^ 幂运算",
+        "lua": "({{a}} ^ {{b}})",
+        "output": true,
+        "inputsInline": true
+      }
+    ],
+    "数学库": [
+      {
+        "type": "math_abs",
+        "label": "绝对值 abs",
+        "lua": "math.abs({{x}})",
+        "output": true
+      },
+      {
+        "type": "math_ceil",
+        "label": "向上取整 ceil",
+        "lua": "math.ceil({{x}})",
+        "output": true
+      },
+      {
+        "type": "math_floor",
+        "label": "向下取整 floor",
+        "lua": "math.floor({{x}})",
+        "output": true
+      },
+      {
+        "type": "math_max",
+        "label": "最大值 max",
+        "lua": "math.max({{a}}, {{b}})",
+        "output": true
+      },
+      {
+        "type": "math_min",
+        "label": "最小值 min",
+        "lua": "math.min({{a}}, {{b}})",
+        "output": true
+      },
+      {
+        "type": "math_sqrt",
+        "label": "平方根 sqrt",
+        "lua": "math.sqrt({{x}})",
+        "output": true
+      },
+      {
+        "type": "math_random_int",
+        "label": "随机整数",
+        "lua": "math.random({{min}}, {{max}})",
+        "output": true
+      },
+      {
+        "type": "math_random",
+        "label": "随机小数 0~1",
+        "lua": "math.random()",
+        "output": true
+      },
+      {
+        "type": "math_randomseed",
+        "label": "设置随机种子",
+        "lua": "math.randomseed({{seed}})"
+      },
+      {
+        "type": "math_pi",
+        "label": "圆周率 π",
+        "lua": "math.pi",
+        "output": true
+      },
+      {
+        "type": "math_sin",
+        "label": "正弦 sin",
+        "lua": "math.sin({{x}})",
+        "output": true
+      },
+      {
+        "type": "math_cos",
+        "label": "余弦 cos",
+        "lua": "math.cos({{x}})",
+        "output": true
+      },
+      {
+        "type": "math_tan",
+        "label": "正切 tan",
+        "lua": "math.tan({{x}})",
+        "output": true
+      },
+      {
+        "type": "math_rad",
+        "label": "角度弧度 rad",
+        "lua": "math.rad({{deg}})",
+        "output": true
+      },
+      {
+        "type": "math_deg",
+        "label": "弧度角度 deg",
+        "lua": "math.deg({{rad}})",
+        "output": true
+      },
+      {
+        "type": "math_exp",
+        "label": "e的次幂 exp",
+        "lua": "math.exp({{x}})",
+        "output": true
+      },
+      {
+        "type": "math_log",
+        "label": "自然对数 log",
+        "lua": "math.log({{x}})",
+        "output": true
+      },
+      {
+        "type": "math_pow",
+        "label": "幂运算 pow",
+        "lua": "math.pow({{base}}, {{exp}})",
+        "output": true
+      }
+    ],
+    "字符串库": [
+      {
+        "type": "str_len",
+        "label": "字符串长度 len",
+        "lua": "string.len({{s}})",
+        "output": true
+      },
+      {
+        "type": "str_sub",
+        "label": "截取子串 sub",
+        "lua": "string.sub({{s}}, {{start}}, {{end}})",
+        "output": true
+      },
+      {
+        "type": "str_find",
+        "label": "查找文本 find",
+        "lua": "string.find({{s}}, {{pattern}})",
+        "output": true
+      },
+      {
+        "type": "str_gsub",
+        "label": "替换文本 gsub",
+        "lua": "string.gsub({{s}}, {{pattern}}, {{repl}})",
+        "output": true
+      },
+      {
+        "type": "str_format",
+        "label": "格式化字符串 format",
+        "lua": "string.format({{fmt}}, {{v1}})",
+        "output": true
+      },
+      {
+        "type": "str_upper",
+        "label": "转大写 upper",
+        "lua": "string.upper({{s}})",
+        "output": true
+      },
+      {
+        "type": "str_lower",
+        "label": "转小写 lower",
+        "lua": "string.lower({{s}})",
+        "output": true
+      },
+      {
+        "type": "str_reverse",
+        "label": "反转 reverse",
+        "lua": "string.reverse({{s}})",
+        "output": true
+      },
+      {
+        "type": "str_rep",
+        "label": "重复字符 rep",
+        "lua": "string.rep({{s}}, {{n}})",
+        "output": true
+      },
+      {
+        "type": "str_byte",
+        "label": "字符编码 byte",
+        "lua": "string.byte({{s}})",
+        "output": true
+      },
+      {
+        "type": "str_char",
+        "label": "编码字符 char",
+        "lua": "string.char({{code}})",
+        "output": true
+      },
+      {
+        "type": "str_match",
+        "label": "匹配捕获 match",
+        "lua": "string.match({{s}}, {{pattern}})",
+        "output": true
+      },
+      {
+        "type": "op_concat",
+        "label": ".. 连接",
+        "lua": "MUTATOR",
+        "output": true,
+        "mutator": "concat_mutator",
+        "inputsInline": true
+      }
+    ],
+    "表操作库": [
+      {
+        "type": "table_insert",
+        "label": "表插入(末尾) insert",
+        "lua": "table.insert({{t}}, {{value}})"
+      },
+      {
+        "type": "table_insert_at",
+        "label": "表插入(指定位置)",
+        "lua": "table.insert({{t}}, {{pos}}, {{value}})"
+      },
+      {
+        "type": "table_remove",
+        "label": "表删除(末尾) remove",
+        "lua": "table.remove({{t}})"
+      },
+      {
+        "type": "table_remove_at",
+        "label": "表删除(指定位置)",
+        "lua": "table.remove({{t}}, {{pos}})"
+      },
+      {
+        "type": "table_sort",
+        "label": "表排序 sort",
+        "lua": "table.sort({{t}})"
+      },
+      {
+        "type": "table_concat",
+        "label": "表拼接 concat",
+        "lua": "table.concat({{t}}, {{sep}})",
+        "output": true
+      },
+      {
+        "type": "table_len",
+        "label": "获取表长度 #",
+        "lua": "#{{t}}",
+        "output": true
+      },
+      {
+        "type": "table_is_empty",
+        "label": "表是否为空",
+        "lua": "(next({{t}}) == nil)",
+        "output": true
+      }
+    ]
+  },
+  "separators": {}
+}

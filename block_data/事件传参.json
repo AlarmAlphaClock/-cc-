@@ -1,0 +1,197 @@
+{
+  "blocks": {
+    "事件传参": [
+      {
+        "type": "evparam_eventobjid",
+        "label": "eventobjid 触发事件的对象",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_x",
+        "label": "x 事件中位置X",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_y",
+        "label": "y 事件中位置Y",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_z",
+        "label": "z 事件中位置Z",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_eventworldid",
+        "label": "eventworldid 事件中星球",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_toobjid",
+        "label": "toobjid 事件中的目标对象",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_actorid",
+        "label": "actorid 触发事件的生物类型",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_targetactorid",
+        "label": "targetactorid 事件中的目标生物类型",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_itemid",
+        "label": "itemid 事件中的道具类型",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_itemix",
+        "label": "itemix 事件中的格子ID",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_itemnum",
+        "label": "itemnum 事件中的道具数量",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_blockid",
+        "label": "blockid 事件中的方块类型",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_defaultvalue",
+        "label": "defaultvalue 自定义数值数据",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_CustomUI",
+        "label": "CustomUI 事件中的界面",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_uielement",
+        "label": "uielement 事件中的元件",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_areaid",
+        "label": "areaid 事件中的区域ID",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_content",
+        "label": "content 事件中的字符串",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_customdata",
+        "label": "customdata 自定义字符串数据",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_ShortCutIdx",
+        "label": "ShortCutIdx 事件中的快捷栏",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_vkey",
+        "label": "vkey 事件中的按键",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_effectid",
+        "label": "effectid 事件中的特效",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_hurtlv",
+        "label": "hurtlv 事件中的伤害值",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_buffid",
+        "label": "buffid 事件中的状态效果",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_playermotion",
+        "label": "playermotion 玩家行为动作",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_hurttype",
+        "label": "hurttype 伤害类型",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_furanceid",
+        "label": "furanceid 事件中的熔炼ID",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_playerattr",
+        "label": "playerattr 玩家属性",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_playerattrval",
+        "label": "playerattrval 玩家属性值",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_hour",
+        "label": "hour 小时",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_second",
+        "label": "second 分钟",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_ticks",
+        "label": "ticks Tick",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_craftid",
+        "label": "craftid 事件中的配方ID",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_weathergroupid",
+        "label": "weathergroupid 事件中的天气组",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_gunAction",
+        "label": "gunAction 枪械动作",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_gunState",
+        "label": "gunState 枪械状态",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_actorattr",
+        "label": "actorattr 生物属性",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_actorattrval",
+        "label": "actorattrval 生物属性值",
+        "mutator": "1"
+      },
+      {
+        "type": "evparam_pickupType",
+        "label": "pickupType 举起或放下类型",
+        "mutator": "1"
+      }
+    ]
+  },
+  "separators": {}
+}

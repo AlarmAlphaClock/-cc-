@@ -1,0 +1,3478 @@
+{
+  "blocks": {
+    "游戏": [
+      {
+        "type": "tev_triggerevent_groupweatherchanged",
+        "label": "当地形组的天气改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.GroupWeatherChanged",
+        "msg0": "令触发器事件 当地形组的天气改变 为 %1",
+        "msg1": "事件传参: weathergroupid(事件中的天气组)",
+        "handler_default": "groupWeatherChanged",
+        "lua": "self:AddTriggerEvent(TriggerEvent.GroupWeatherChanged, self.{{HANDLER}})",
+        "params_desc": [
+          "weathergroupid(事件中的天气组)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_gamestart",
+        "label": "游戏创建",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.GameStart",
+        "msg0": "令触发器事件 游戏创建 为 %1",
+        "msg1": null,
+        "handler_default": "gameStart",
+        "lua": "self:AddTriggerEvent(TriggerEvent.GameStart, self.{{HANDLER}})",
+        "params_desc": []
+      },
+      {
+        "type": "tev_triggerevent_gamehour",
+        "label": "游戏时间",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.GameHour",
+        "msg0": "令触发器事件 游戏时间 为 %1",
+        "msg1": "事件传参: hour(小时) second(分钟) ticks(Tick)",
+        "handler_default": "gameHour",
+        "lua": "self:AddTriggerEvent(TriggerEvent.GameHour, self.{{HANDLER}})",
+        "params_desc": [
+          "hour(小时)",
+          "second(分钟)",
+          "ticks(Tick)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_minitimerchange",
+        "label": "任意计时器改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MinitimerChange",
+        "msg0": "令触发器事件 任意计时器改变 为 %1",
+        "msg1": null,
+        "handler_default": "minitimerChange",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MinitimerChange, self.{{HANDLER}})",
+        "params_desc": []
+      },
+      {
+        "type": "tev_triggerevent_craftend",
+        "label": "配方合成完毕",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.CraftEnd",
+        "msg0": "令触发器事件 配方合成完毕 为 %1",
+        "msg1": "事件传参: craftid(事件中的配方ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "craftEnd",
+        "lua": "self:AddTriggerEvent(TriggerEvent.CraftEnd, self.{{HANDLER}})",
+        "params_desc": [
+          "craftid(事件中的配方ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_furnacebegin",
+        "label": "当 熔炼 开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.FurnaceBegin",
+        "msg0": "令触发器事件 当 熔炼 开始 为 %1",
+        "msg1": "事件传参: furanceid(事件中的熔炼ID) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "furnaceBegin",
+        "lua": "self:AddTriggerEvent(TriggerEvent.FurnaceBegin, self.{{HANDLER}})",
+        "params_desc": [
+          "furanceid(事件中的熔炼ID)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_furnaceend",
+        "label": "当 熔炼 结束",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.FurnaceEnd",
+        "msg0": "令触发器事件 当 熔炼 结束 为 %1",
+        "msg1": "事件传参: furanceid(事件中的熔炼ID) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "furnaceEnd",
+        "lua": "self:AddTriggerEvent(TriggerEvent.FurnaceEnd, self.{{HANDLER}})",
+        "params_desc": [
+          "furanceid(事件中的熔炼ID)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      }
+    ],
+    "玩家": [
+      {
+        "type": "tev_triggerevent_playerrevive",
+        "label": "玩家复活",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerRevive",
+        "msg0": "令触发器事件 玩家复活 为 %1",
+        "msg1": "事件传参: defaultvalue(自定义数值数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerRevive",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerRevive, self.{{HANDLER}})",
+        "params_desc": [
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playermoveoneblocksize",
+        "label": "玩家移动",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerMoveOneBlockSize",
+        "msg0": "令触发器事件 玩家移动 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerMoveOneBlockSize",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerMoveOneBlockSize, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerselectshortcut",
+        "label": "玩家选中快捷栏",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerSelectShortcut",
+        "msg0": "令触发器事件 玩家选中快捷栏 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "playerSelectShortcut",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerSelectShortcut, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerinvatefriend",
+        "label": "玩家邀请好友",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerInvateFriend",
+        "msg0": "令触发器事件 玩家邀请好友 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x,y,z(事件中的位置) toobjid(事件中的目标对象) eventworldid(事件中的星球)",
+        "handler_default": "playerInvateFriend",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerInvateFriend, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x,y,z(事件中的位置)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中的星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_gameanyplayerentergame",
+        "label": "当 玩家 进入游戏",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.GameAnyPlayerEnterGame",
+        "msg0": "令触发器事件 当 玩家 进入游戏 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "gameAnyPlayerEnterGame",
+        "lua": "self:AddTriggerEvent(TriggerEvent.GameAnyPlayerEnterGame, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_gameanyplayerleavegame",
+        "label": "当 玩家 离开游戏",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.GameAnyPlayerLeaveGame",
+        "msg0": "令触发器事件 当 玩家 离开游戏 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中的星球)",
+        "handler_default": "gameAnyPlayerLeaveGame",
+        "lua": "self:AddTriggerEvent(TriggerEvent.GameAnyPlayerLeaveGame, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中的星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_gameanyplayervictory",
+        "label": "当 玩家 游戏胜利",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.GameAnyPlayerVictory",
+        "msg0": "令触发器事件 当 玩家 游戏胜利 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "gameAnyPlayerVictory",
+        "lua": "self:AddTriggerEvent(TriggerEvent.GameAnyPlayerVictory, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_gameanyplayerdefeat",
+        "label": "当 玩家 游戏失败",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.GameAnyPlayerDefeat",
+        "msg0": "令触发器事件 当 玩家 游戏失败 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "gameAnyPlayerDefeat",
+        "lua": "self:AddTriggerEvent(TriggerEvent.GameAnyPlayerDefeat, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerclickblock",
+        "label": "当 玩家 点击任意方块",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerClickBlock",
+        "msg0": "令触发器事件 当 玩家 点击任意方块 为 %1",
+        "msg1": "事件传参: blockid(事件中的方块类型) eventobjid(触发事件的对象) eventworldid(事件中的星球) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "playerClickBlock",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerClickBlock, self.{{HANDLER}})",
+        "params_desc": [
+          "blockid(事件中的方块类型)",
+          "eventobjid(触发事件的对象)",
+          "eventworldid(事件中的星球)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerclickplayer",
+        "label": "当 玩家 点击任意玩家",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerClickPlayer",
+        "msg0": "令触发器事件 当 玩家 点击任意玩家 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerClickPlayer",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerClickPlayer, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerclickmob",
+        "label": "当 玩家 点击任意生物",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerClickMob",
+        "msg0": "令触发器事件 当 玩家 点击任意生物 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerClickMob",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerClickMob, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerclickprojectile",
+        "label": "当 玩家 点击任意投掷物",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerClickProjectile",
+        "msg0": "令触发器事件 当 玩家 点击任意投掷物 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerClickProjectile",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerClickProjectile, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerclickdropitem",
+        "label": "当 玩家 点击任意掉落物",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerClickDropItem",
+        "msg0": "令触发器事件 当 玩家 点击任意掉落物 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerClickDropItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerClickDropItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerclickentity",
+        "label": "当 玩家 点击任意实体",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerClickEntity",
+        "msg0": "令触发器事件 当 玩家 点击任意实体 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerClickEntity",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerClickEntity, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerinputkeyclick",
+        "label": "当 任意玩家 点击 按键",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerInputKeyClick",
+        "msg0": "令触发器事件 当 任意玩家 点击 按键 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) vkey(事件中的按键) eventworldid(事件中星球)",
+        "handler_default": "playerInputKeyClick",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerInputKeyClick, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "vkey(事件中的按键)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerinputkeydown",
+        "label": "当 任意玩家 按下 按键",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerInputKeyDown",
+        "msg0": "令触发器事件 当 任意玩家 按下 按键 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) vkey(事件中的按键) eventworldid(事件中星球)",
+        "handler_default": "playerInputKeyDown",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerInputKeyDown, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "vkey(事件中的按键)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerinputkeyup",
+        "label": "当 任意玩家 抬起 按键",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerInputKeyUp",
+        "msg0": "令触发器事件 当 任意玩家 抬起 按键 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) vkey(事件中的按键) eventworldid(事件中星球)",
+        "handler_default": "playerInputKeyUp",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerInputKeyUp, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "vkey(事件中的按键)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerinputkeyonpress",
+        "label": "当 任意玩家 长按 按键",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerInputKeyOnPress",
+        "msg0": "令触发器事件 当 任意玩家 长按 按键 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) vkey(事件中的按键) eventworldid(事件中星球)",
+        "handler_default": "playerInputKeyOnPress",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerInputKeyOnPress, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "vkey(事件中的按键)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playernewinputcontent",
+        "label": "玩家发送聊天信息",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerNewInputContent",
+        "msg0": "令触发器事件 玩家发送聊天信息 为 %1",
+        "msg1": "事件传参: content(事件中的字符串) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerNewInputContent",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerNewInputContent, self.{{HANDLER}})",
+        "params_desc": [
+          "content(事件中的字符串)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playergunaction",
+        "label": "当玩家持枪状态改变时",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerGunAction",
+        "msg0": "令触发器事件 当玩家持枪状态改变时 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) gunAction(枪械动作) gunState(枪械状态) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerGunAction",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerGunAction, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "gunAction(枪械动作)",
+          "gunState(枪械状态)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playermotionstatechange",
+        "label": "当 玩家进入运动状态",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerMotionStateChange",
+        "msg0": "令触发器事件 当 玩家进入运动状态 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) playermotion(玩家行为动作) eventworldid(事件中星球)",
+        "handler_default": "playerMotionStateChange",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerMotionStateChange, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "playermotion(玩家行为动作)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playermotionstatechangeend",
+        "label": "当 玩家离开运动状态",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerMotionStateChangeEnd",
+        "msg0": "令触发器事件 当 玩家离开运动状态 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) playermotion(玩家行为动作) eventworldid(事件中星球)",
+        "handler_default": "playerMotionStateChangeEnd",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerMotionStateChangeEnd, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "playermotion(玩家行为动作)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playeradditem",
+        "label": "当 玩家 获得道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerAddItem",
+        "msg0": "令触发器事件 当 玩家 获得道具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "playerAddItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerAddItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playeruseitem",
+        "label": "当 玩家 开始使用道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerUseItem",
+        "msg0": "令触发器事件 当 玩家 开始使用道具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "playerUseItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerUseItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerchargeitembegin",
+        "label": "当 玩家 开始蓄力道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerChargeItemBegin",
+        "msg0": "令触发器事件 当 玩家 开始蓄力道具 为 %1",
+        "msg1": "事件传参: defaultvalue(自定义数值数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "playerChargeItemBegin",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerChargeItemBegin, self.{{HANDLER}})",
+        "params_desc": [
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerconsumeitem",
+        "label": "当 玩家 消耗道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerConsumeItem",
+        "msg0": "令触发器事件 当 玩家 消耗道具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "playerConsumeItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerConsumeItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerpickupitem",
+        "label": "当 玩家 拾取道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerPickUpItem",
+        "msg0": "令触发器事件 当 玩家 拾取道具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerPickUpItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerPickUpItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerdiscarditem",
+        "label": "当 玩家 丢弃道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerDiscardItem",
+        "msg0": "令触发器事件 当 玩家 丢弃道具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerDiscardItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerDiscardItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerchargeitemend",
+        "label": "当 玩家 结束蓄力道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerChargeItemEnd",
+        "msg0": "令触发器事件 当 玩家 结束蓄力道具 为 %1",
+        "msg1": "事件传参: defaultvalue(自定义数值数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "playerChargeItemEnd",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerChargeItemEnd, self.{{HANDLER}})",
+        "params_desc": [
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playershortcutchange",
+        "label": "当 玩家的 快捷栏 发生改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerShortcutChange",
+        "msg0": "令触发器事件 当 玩家的 快捷栏 发生改变 为 %1",
+        "msg1": "事件传参: ShortCutIdx(事件中的快捷栏) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "playerShortcutChange",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerShortcutChange, self.{{HANDLER}})",
+        "params_desc": [
+          "ShortCutIdx(事件中的快捷栏)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playershortcutadditem",
+        "label": "当 玩家的 快捷栏 放入道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerShortcutAddItem",
+        "msg0": "令触发器事件 当 玩家的 快捷栏 放入道具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerShortcutAddItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerShortcutAddItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playershortcutremitem",
+        "label": "当 玩家的 快捷栏 取出道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerShortcutRemItem",
+        "msg0": "令触发器事件 当 玩家的 快捷栏 取出道具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerShortcutRemItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerShortcutRemItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerbackpackchange",
+        "label": "当 玩家的 背包栏 发生改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerBackPackChange",
+        "msg0": "令触发器事件 当 玩家的 背包栏 发生改变 为 %1",
+        "msg1": "事件传参: ShortCutIdx(事件中的快捷栏) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "playerBackPackChange",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerBackPackChange, self.{{HANDLER}})",
+        "params_desc": [
+          "ShortCutIdx(事件中的快捷栏)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerbackpackadditem",
+        "label": "当 玩家的 背包栏 放入道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerBackPackAddItem",
+        "msg0": "令触发器事件 当 玩家的 背包栏 放入道具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerBackPackAddItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerBackPackAddItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerbackpackremitem",
+        "label": "当 玩家的 背包栏 取出道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerBackPackRemItem",
+        "msg0": "令触发器事件 当 玩家的 背包栏 取出道具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerBackPackRemItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerBackPackRemItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerequipchange",
+        "label": "当 玩家的 装备栏 发生改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerEquipChange",
+        "msg0": "令触发器事件 当 玩家的 装备栏 发生改变 为 %1",
+        "msg1": "事件传参: ShortCutIdx(事件中的快捷栏) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "playerEquipChange",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerEquipChange, self.{{HANDLER}})",
+        "params_desc": [
+          "ShortCutIdx(事件中的快捷栏)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerequipadditem",
+        "label": "当 玩家的 装备栏 放入道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerEquipAddItem",
+        "msg0": "令触发器事件 当 玩家的 装备栏 放入道具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerEquipAddItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerEquipAddItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerequipremitem",
+        "label": "当 玩家的 装备栏 取出道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerEquipRemItem",
+        "msg0": "令触发器事件 当 玩家的 装备栏 取出道具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerEquipRemItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerEquipRemItem, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerequipon",
+        "label": "当 玩家 穿上 装备",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerEquipOn",
+        "msg0": "令触发器事件 当 玩家 穿上 装备 为 %1",
+        "msg1": "事件传参: ShortCutIdx(事件中的快捷栏) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "playerEquipOn",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerEquipOn, self.{{HANDLER}})",
+        "params_desc": [
+          "ShortCutIdx(事件中的快捷栏)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerequipoff",
+        "label": "当 玩家 脱下 装备",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerEquipOff",
+        "msg0": "令触发器事件 当 玩家 脱下 装备 为 %1",
+        "msg1": "事件传参: ShortCutIdx(事件中的快捷栏) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "playerEquipOff",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerEquipOff, self.{{HANDLER}})",
+        "params_desc": [
+          "ShortCutIdx(事件中的快捷栏)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playeropeninnerview",
+        "label": "当 任意玩家 打开 游戏 内部页面 界面",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerOpenInnerView",
+        "msg0": "令触发器事件 当 任意玩家 打开 游戏 内部页面 界面 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) eventobjid(触发事件的对象) x,y,z(事件中的位置) eventworldid(事件中的星球)",
+        "handler_default": "playerOpenInnerView",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerOpenInnerView, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "eventobjid(触发事件的对象)",
+          "x,y,z(事件中的位置)",
+          "eventworldid(事件中的星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playercloseinnerview",
+        "label": "当 任意玩家 关闭 游戏 内部页面 界面",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerCloseInnerView",
+        "msg0": "令触发器事件 当 任意玩家 关闭 游戏 内部页面 界面 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) eventobjid(触发事件的对象) x,y,z(事件中的位置) eventworldid(事件中的星球)",
+        "handler_default": "playerCloseInnerView",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerCloseInnerView, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "eventobjid(触发事件的对象)",
+          "x,y,z(事件中的位置)",
+          "eventworldid(事件中的星球)"
+        ]
+      }
+    ],
+    "方块": [
+      {
+        "type": "tev_triggerevent_blockadd",
+        "label": "方块被创建",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.BlockAdd",
+        "msg0": "令触发器事件 方块被创建 为 %1",
+        "msg1": "事件传参: blockid(事件中的方块类型) eventworldid(事件中的星球) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "blockAdd",
+        "lua": "self:AddTriggerEvent(TriggerEvent.BlockAdd, self.{{HANDLER}})",
+        "params_desc": [
+          "blockid(事件中的方块类型)",
+          "eventworldid(事件中的星球)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_blockremove",
+        "label": "当 方块 被被破坏",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.BlockRemove",
+        "msg0": "令触发器事件 当 方块 被被破坏 为 %1",
+        "msg1": "事件传参: blockid(事件中的方块类型) eventworldid(事件中的星球) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "blockRemove",
+        "lua": "self:AddTriggerEvent(TriggerEvent.BlockRemove, self.{{HANDLER}})",
+        "params_desc": [
+          "blockid(事件中的方块类型)",
+          "eventworldid(事件中的星球)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_blockdigbegin",
+        "label": "当 方块 被被挖掘",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.BlockDigBegin",
+        "msg0": "令触发器事件 当 方块 被被挖掘 为 %1",
+        "msg1": "事件传参: blockid(事件中的方块类型) eventobjid(触发事件的对象) eventworldid(事件中的星球) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "blockDigBegin",
+        "lua": "self:AddTriggerEvent(TriggerEvent.BlockDigBegin, self.{{HANDLER}})",
+        "params_desc": [
+          "blockid(事件中的方块类型)",
+          "eventobjid(触发事件的对象)",
+          "eventworldid(事件中的星球)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_blockdigend",
+        "label": "当 方块 被被挖掘完毕",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.BlockDigEnd",
+        "msg0": "令触发器事件 当 方块 被被挖掘完毕 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) blockid(事件中的方块类型) eventobjid(触发事件的对象) eventworldid(事件中的星球) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "blockDigEnd",
+        "lua": "self:AddTriggerEvent(TriggerEvent.BlockDigEnd, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "blockid(事件中的方块类型)",
+          "eventobjid(触发事件的对象)",
+          "eventworldid(事件中的星球)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_blockdigcancel",
+        "label": "当 方块 被被挖掘中断",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.BlockDigCancel",
+        "msg0": "令触发器事件 当 方块 被被挖掘中断 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) blockid(事件中的方块类型) eventobjid(触发事件的对象) eventworldid(事件中的星球) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "blockDigCancel",
+        "lua": "self:AddTriggerEvent(TriggerEvent.BlockDigCancel, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "blockid(事件中的方块类型)",
+          "eventobjid(触发事件的对象)",
+          "eventworldid(事件中的星球)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_blocktrigger",
+        "label": "当 方块 开关状态 发生改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.BlockTrigger",
+        "msg0": "令触发器事件 当 方块 开关状态 发生改变 为 %1",
+        "msg1": "事件传参: blockid(事件中的方块类型) eventobjid(触发事件的对象) eventworldid(事件中的星球) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "blockTrigger",
+        "lua": "self:AddTriggerEvent(TriggerEvent.BlockTrigger, self.{{HANDLER}})",
+        "params_desc": [
+          "blockid(事件中的方块类型)",
+          "eventobjid(触发事件的对象)",
+          "eventworldid(事件中的星球)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_blockchangecolor",
+        "label": "当 方块 颜色 发生改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.BlockChangeColor",
+        "msg0": "令触发器事件 当 方块 颜色 发生改变 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) blockid(事件中的方块类型) eventobjid(触发事件的对象) eventworldid(事件中的星球) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "blockChangeColor",
+        "lua": "self:AddTriggerEvent(TriggerEvent.BlockChangeColor, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "blockid(事件中的方块类型)",
+          "eventobjid(触发事件的对象)",
+          "eventworldid(事件中的星球)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_blockchangedir",
+        "label": "当 方块 方向 发生改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.BlockChangeDir",
+        "msg0": "令触发器事件 当 方块 方向 发生改变 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) blockid(事件中的方块类型) eventobjid(触发事件的对象) eventworldid(事件中的星球) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "blockChangeDir",
+        "lua": "self:AddTriggerEvent(TriggerEvent.BlockChangeDir, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "blockid(事件中的方块类型)",
+          "eventobjid(触发事件的对象)",
+          "eventworldid(事件中的星球)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_blockcontainerchange",
+        "label": "当 储存容器 内 发生改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.BlockContainerChange",
+        "msg0": "令触发器事件 当 储存容器 内 发生改变 为 %1",
+        "msg1": "事件传参: blockid(事件中的方块类型) eventworldid(事件中的星球) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "blockContainerChange",
+        "lua": "self:AddTriggerEvent(TriggerEvent.BlockContainerChange, self.{{HANDLER}})",
+        "params_desc": [
+          "blockid(事件中的方块类型)",
+          "eventworldid(事件中的星球)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_blockcontainerputin",
+        "label": "当 储存容器 内 放入道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.BlockContainerPutIn",
+        "msg0": "令触发器事件 当 储存容器 内 放入道具 为 %1",
+        "msg1": "事件传参: blockid(事件中的方块类型) eventworldid(事件中的星球) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "blockContainerPutIn",
+        "lua": "self:AddTriggerEvent(TriggerEvent.BlockContainerPutIn, self.{{HANDLER}})",
+        "params_desc": [
+          "blockid(事件中的方块类型)",
+          "eventworldid(事件中的星球)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_blockcontainertakeout",
+        "label": "当 储存容器 内 取出道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.BlockContainerTakeOut",
+        "msg0": "令触发器事件 当 储存容器 内 取出道具 为 %1",
+        "msg1": "事件传参: blockid(事件中的方块类型) eventworldid(事件中的星球) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "blockContainerTakeOut",
+        "lua": "self:AddTriggerEvent(TriggerEvent.BlockContainerTakeOut, self.{{HANDLER}})",
+        "params_desc": [
+          "blockid(事件中的方块类型)",
+          "eventworldid(事件中的星球)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      }
+    ],
+    "界面": [
+      {
+        "type": "tev_triggerevent_uilostfocus",
+        "label": "玩家在界面输入字符串",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UILostFocus",
+        "msg0": "令触发器事件 玩家在界面输入字符串 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) content(事件中的字符串) customdata(自定义字符串数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uILostFocus",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UILostFocus, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "content(事件中的字符串)",
+          "customdata(自定义字符串数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uispinecomplete",
+        "label": "当前界面的 元件 动画装载器播放完毕",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UISpineComplete",
+        "msg0": "令触发器事件 当前界面的 元件 动画装载器播放完毕 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) content(事件中的字符串) customdata(自定义字符串数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uISpineComplete",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UISpineComplete, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "content(事件中的字符串)",
+          "customdata(自定义字符串数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uishow",
+        "label": "当前界面被打开",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIShow",
+        "msg0": "令触发器事件 当前界面被打开 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIShow",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIShow, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uihide",
+        "label": "当前界面被关闭",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIHide",
+        "msg0": "令触发器事件 当前界面被关闭 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIHide",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIHide, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uibuttonclick",
+        "label": "当前界面的元件被点击",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIButtonClick",
+        "msg0": "令触发器事件 当前界面的元件被点击 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) content(事件中的字符串) customdata(自定义字符串数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIButtonClick",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIButtonClick, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "content(事件中的字符串)",
+          "customdata(自定义字符串数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uibuttontouchbegin",
+        "label": "当前界面的元件被按下",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIButtonTouchBegin",
+        "msg0": "令触发器事件 当前界面的元件被按下 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIButtonTouchBegin",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIButtonTouchBegin, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uibuttontouchend",
+        "label": "当前界面的元件被抬起",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIButtonTouchEnd",
+        "msg0": "令触发器事件 当前界面的元件被抬起 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) customdata(自定义字符串数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIButtonTouchEnd",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIButtonTouchEnd, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "customdata(自定义字符串数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uibuttonlongpress",
+        "label": "当前界面的元件被长按",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIButtonLongPress",
+        "msg0": "令触发器事件 当前界面的元件被长按 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) content(事件中的字符串) customdata(自定义字符串数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIButtonLongPress",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIButtonLongPress, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "content(事件中的字符串)",
+          "customdata(自定义字符串数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uigloader3dtouchclick",
+        "label": "当前界面的元件被点击",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIGLoader3DTouchClick",
+        "msg0": "令触发器事件 当前界面的元件被点击 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) content(事件中的字符串) customdata(自定义字符串数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIGLoader3DTouchClick",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIGLoader3DTouchClick, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "content(事件中的字符串)",
+          "customdata(自定义字符串数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uigloader3dtouchbegin",
+        "label": "当前界面的元件被按下",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIGLoader3DTouchBegin",
+        "msg0": "令触发器事件 当前界面的元件被按下 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIGLoader3DTouchBegin",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIGLoader3DTouchBegin, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uigloader3dtouchend",
+        "label": "当前界面的元件被抬起",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIGLoader3DTouchEnd",
+        "msg0": "令触发器事件 当前界面的元件被抬起 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) customdata(自定义字符串数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIGLoader3DTouchEnd",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIGLoader3DTouchEnd, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "customdata(自定义字符串数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uigloader3dlongpress",
+        "label": "当前界面的元件被长按",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIGLoader3DLongPress",
+        "msg0": "令触发器事件 当前界面的元件被长按 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) content(事件中的字符串) customdata(自定义字符串数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIGLoader3DLongPress",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIGLoader3DLongPress, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "content(事件中的字符串)",
+          "customdata(自定义字符串数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uiscrollpanetouchbegin",
+        "label": "当前界面的触摸滑动开始%2",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIScrollPaneTouchBegin",
+        "msg0": "令触发器事件 当前界面的触摸滑动开始%2 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) content(事件中的字符串) customdata(自定义字符串数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIScrollPaneTouchBegin",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIScrollPaneTouchBegin, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "content(事件中的字符串)",
+          "customdata(自定义字符串数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uiscrollpanetouchend",
+        "label": "当前界面的触摸滑动结束%2",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIScrollPaneTouchEnd",
+        "msg0": "令触发器事件 当前界面的触摸滑动结束%2 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) content(事件中的字符串) customdata(自定义字符串数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIScrollPaneTouchEnd",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIScrollPaneTouchEnd, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "content(事件中的字符串)",
+          "customdata(自定义字符串数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_uiscrollpanescrollend",
+        "label": "当前界面的惯性滑动结束%2",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.UIScrollPaneScrollEnd",
+        "msg0": "令触发器事件 当前界面的惯性滑动结束%2 为 %1",
+        "msg1": "事件传参: CustomUI(事件中的界面) content(事件中的字符串) customdata(自定义字符串数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) uielement(事件中的元件) eventworldid(事件中星球)",
+        "handler_default": "uIScrollPaneScrollEnd",
+        "lua": "self:AddTriggerEvent(TriggerEvent.UIScrollPaneScrollEnd, self.{{HANDLER}})",
+        "params_desc": [
+          "CustomUI(事件中的界面)",
+          "content(事件中的字符串)",
+          "customdata(自定义字符串数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "uielement(事件中的元件)",
+          "eventworldid(事件中星球)"
+        ]
+      }
+    ],
+    "特效": [
+      {
+        "type": "tev_triggerevent_particleposoncreate",
+        "label": "当 特效 创建在任意位置",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ParticlePosOnCreate",
+        "msg0": "令触发器事件 当 特效 创建在任意位置 为 %1",
+        "msg1": "事件传参: effectid(事件中的特效) eventworldid(事件中的星球) x(事件中位置X) y(事件中位置Y) z(事件中位置Z)",
+        "handler_default": "particlePosOnCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ParticlePosOnCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "effectid(事件中的特效)",
+          "eventworldid(事件中的星球)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_particleobjectoncreate",
+        "label": "当 特效 创建在任意对象",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ParticleObjectOnCreate",
+        "msg0": "令触发器事件 当 特效 创建在任意对象 为 %1",
+        "msg1": "事件传参: effectid(事件中的特效) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "particleObjectOnCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ParticleObjectOnCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "effectid(事件中的特效)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_particleplayeroncreate",
+        "label": "当 特效 创建在任意玩家",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ParticlePlayerOnCreate",
+        "msg0": "令触发器事件 当 特效 创建在任意玩家 为 %1",
+        "msg1": "事件传参: effectid(事件中的特效) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "particlePlayerOnCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ParticlePlayerOnCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "effectid(事件中的特效)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_particlemoboncreate",
+        "label": "当 特效 创建在任意生物",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ParticleMobOnCreate",
+        "msg0": "令触发器事件 当 特效 创建在任意生物 为 %1",
+        "msg1": "事件传参: effectid(事件中的特效) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "particleMobOnCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ParticleMobOnCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "effectid(事件中的特效)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_particleprojectileoncreate",
+        "label": "当 特效 创建在任意投掷物",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ParticleProjectileOnCreate",
+        "msg0": "令触发器事件 当 特效 创建在任意投掷物 为 %1",
+        "msg1": "事件传参: effectid(事件中的特效) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "particleProjectileOnCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ParticleProjectileOnCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "effectid(事件中的特效)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_particleitemoncreate",
+        "label": "当 特效 创建在任意掉落物",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ParticleItemOnCreate",
+        "msg0": "令触发器事件 当 特效 创建在任意掉落物 为 %1",
+        "msg1": "事件传参: effectid(事件中的特效) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "particleItemOnCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ParticleItemOnCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "effectid(事件中的特效)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_particleentityoncreate",
+        "label": "当 特效 创建在任意实体",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ParticleEntityOnCreate",
+        "msg0": "令触发器事件 当 特效 创建在任意实体 为 %1",
+        "msg1": "事件传参: effectid(事件中的特效) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "particleEntityOnCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ParticleEntityOnCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "effectid(事件中的特效)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      }
+    ],
+    "开发者": [
+      {
+        "type": "tev_triggerevent_developerbuyitem",
+        "label": "任意玩家购买或提取开发者商店道具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.DeveloperBuyItem",
+        "msg0": "令触发器事件 任意玩家购买或提取开发者商店道具 为 %1",
+        "msg1": "事件传参: itemid(事件中的道具类型) eventobjid(触发事件的对象) x,y,z(事件中的位置) eventworldid(事件中的星球)",
+        "handler_default": "developerBuyItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.DeveloperBuyItem, self.{{HANDLER}})",
+        "params_desc": [
+          "itemid(事件中的道具类型)",
+          "eventobjid(触发事件的对象)",
+          "x,y,z(事件中的位置)",
+          "eventworldid(事件中的星球)"
+        ]
+      }
+    ],
+    "对象": [
+      {
+        "type": "tev_triggerevent_playercollidetoplayer",
+        "label": "当 任意玩家和任意玩家 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerCollideToPlayer",
+        "msg0": "令触发器事件 当 任意玩家和任意玩家 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerCollideToPlayer",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerCollideToPlayer, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playercollidetomob",
+        "label": "当 任意玩家和任意生物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerCollideToMob",
+        "msg0": "令触发器事件 当 任意玩家和任意生物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerCollideToMob",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerCollideToMob, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playercollidetomissile",
+        "label": "当 任意玩家和任意投掷物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerCollideToMissile",
+        "msg0": "令触发器事件 当 任意玩家和任意投掷物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerCollideToMissile",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerCollideToMissile, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playercollidetodropitem",
+        "label": "当 任意玩家和任意掉落物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerCollideToDropItem",
+        "msg0": "令触发器事件 当 任意玩家和任意掉落物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerCollideToDropItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerCollideToDropItem, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playercollidetoentity",
+        "label": "当 任意玩家和任意实体 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerCollideToEntity",
+        "msg0": "令触发器事件 当 任意玩家和任意实体 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerCollideToEntity",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerCollideToEntity, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playercollidetoareaobj",
+        "label": "当 任意玩家和任意区域 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerCollideToAreaObj",
+        "msg0": "令触发器事件 当 任意玩家和任意区域 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerCollideToAreaObj",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerCollideToAreaObj, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobcollidetoplayer",
+        "label": "当 任意生物和任意玩家 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobCollideToPlayer",
+        "msg0": "令触发器事件 当 任意生物和任意玩家 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobCollideToPlayer",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobCollideToPlayer, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobcollidetomob",
+        "label": "当 任意生物和任意生物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobCollideToMob",
+        "msg0": "令触发器事件 当 任意生物和任意生物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobCollideToMob",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobCollideToMob, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobcollidetomissile",
+        "label": "当 任意生物和任意投掷物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobCollideToMissile",
+        "msg0": "令触发器事件 当 任意生物和任意投掷物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobCollideToMissile",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobCollideToMissile, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobcollidetodropitem",
+        "label": "当 任意生物和任意掉落物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobCollideToDropItem",
+        "msg0": "令触发器事件 当 任意生物和任意掉落物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobCollideToDropItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobCollideToDropItem, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobcollidetoentity",
+        "label": "当 任意生物和任意实体 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobCollideToEntity",
+        "msg0": "令触发器事件 当 任意生物和任意实体 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobCollideToEntity",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobCollideToEntity, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobcollidetoareaobj",
+        "label": "当 任意生物和任意区域 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobCollideToAreaObj",
+        "msg0": "令触发器事件 当 任意生物和任意区域 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobCollideToAreaObj",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobCollideToAreaObj, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_missilecollidetoplayer",
+        "label": "当 任意投掷物和任意玩家 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MissileCollideToPlayer",
+        "msg0": "令触发器事件 当 任意投掷物和任意玩家 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "missileCollideToPlayer",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MissileCollideToPlayer, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_missilecollidetomob",
+        "label": "当 任意投掷物和任意生物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MissileCollideToMob",
+        "msg0": "令触发器事件 当 任意投掷物和任意生物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "missileCollideToMob",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MissileCollideToMob, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_missilecollidetomissile",
+        "label": "当 任意投掷物和任意投掷物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MissileCollideToMissile",
+        "msg0": "令触发器事件 当 任意投掷物和任意投掷物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "missileCollideToMissile",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MissileCollideToMissile, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_missilecollidetodropitem",
+        "label": "当 任意投掷物和任意掉落物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MissileCollideToDropItem",
+        "msg0": "令触发器事件 当 任意投掷物和任意掉落物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "missileCollideToDropItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MissileCollideToDropItem, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_missilecollidetoentity",
+        "label": "当 任意投掷物和任意实体 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MissileCollideToEntity",
+        "msg0": "令触发器事件 当 任意投掷物和任意实体 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "missileCollideToEntity",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MissileCollideToEntity, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_missilecollidetoareaobj",
+        "label": "当 任意投掷物和任意区域 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MissileCollideToAreaObj",
+        "msg0": "令触发器事件 当 任意投掷物和任意区域 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "missileCollideToAreaObj",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MissileCollideToAreaObj, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_dropitemcollidetoplayer",
+        "label": "当 任意掉落物和任意玩家 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.DropItemCollideToPlayer",
+        "msg0": "令触发器事件 当 任意掉落物和任意玩家 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "dropItemCollideToPlayer",
+        "lua": "self:AddTriggerEvent(TriggerEvent.DropItemCollideToPlayer, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_dropitemcollidetomob",
+        "label": "当 任意掉落物和任意生物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.DropItemCollideToMob",
+        "msg0": "令触发器事件 当 任意掉落物和任意生物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "dropItemCollideToMob",
+        "lua": "self:AddTriggerEvent(TriggerEvent.DropItemCollideToMob, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_dropitemcollidetomissile",
+        "label": "当 任意掉落物和任意投掷物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.DropItemCollideToMissile",
+        "msg0": "令触发器事件 当 任意掉落物和任意投掷物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "dropItemCollideToMissile",
+        "lua": "self:AddTriggerEvent(TriggerEvent.DropItemCollideToMissile, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_dropitemcollidetodropitem",
+        "label": "当 任意掉落物和任意掉落物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.DropItemCollideToDropItem",
+        "msg0": "令触发器事件 当 任意掉落物和任意掉落物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "dropItemCollideToDropItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.DropItemCollideToDropItem, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_dropitemcollidetoentity",
+        "label": "当 任意掉落物和任意实体 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.DropItemCollideToEntity",
+        "msg0": "令触发器事件 当 任意掉落物和任意实体 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "dropItemCollideToEntity",
+        "lua": "self:AddTriggerEvent(TriggerEvent.DropItemCollideToEntity, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_dropitemcollidetoareaobj",
+        "label": "当 任意掉落物和任意区域 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.DropItemCollideToAreaObj",
+        "msg0": "令触发器事件 当 任意掉落物和任意区域 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "dropItemCollideToAreaObj",
+        "lua": "self:AddTriggerEvent(TriggerEvent.DropItemCollideToAreaObj, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_entitycollidetoplayer",
+        "label": "当 任意实体和任意玩家 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.EntityCollideToPlayer",
+        "msg0": "令触发器事件 当 任意实体和任意玩家 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "entityCollideToPlayer",
+        "lua": "self:AddTriggerEvent(TriggerEvent.EntityCollideToPlayer, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_entitycollidetomob",
+        "label": "当 任意实体和任意生物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.EntityCollideToMob",
+        "msg0": "令触发器事件 当 任意实体和任意生物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "entityCollideToMob",
+        "lua": "self:AddTriggerEvent(TriggerEvent.EntityCollideToMob, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_entitycollidetomissile",
+        "label": "当 任意实体和任意投掷物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.EntityCollideToMissile",
+        "msg0": "令触发器事件 当 任意实体和任意投掷物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "entityCollideToMissile",
+        "lua": "self:AddTriggerEvent(TriggerEvent.EntityCollideToMissile, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_entitycollidetodropitem",
+        "label": "当 任意实体和任意掉落物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.EntityCollideToDropItem",
+        "msg0": "令触发器事件 当 任意实体和任意掉落物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "entityCollideToDropItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.EntityCollideToDropItem, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_entitycollidetoentity",
+        "label": "当 任意实体和任意实体 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.EntityCollideToEntity",
+        "msg0": "令触发器事件 当 任意实体和任意实体 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "entityCollideToEntity",
+        "lua": "self:AddTriggerEvent(TriggerEvent.EntityCollideToEntity, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_entitycollidetoareaobj",
+        "label": "当 任意实体和任意区域 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.EntityCollideToAreaObj",
+        "msg0": "令触发器事件 当 任意实体和任意区域 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "entityCollideToAreaObj",
+        "lua": "self:AddTriggerEvent(TriggerEvent.EntityCollideToAreaObj, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_areaobjcollidetoplayer",
+        "label": "当 任意区域和任意玩家 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.AreaObjCollideToPlayer",
+        "msg0": "令触发器事件 当 任意区域和任意玩家 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "areaObjCollideToPlayer",
+        "lua": "self:AddTriggerEvent(TriggerEvent.AreaObjCollideToPlayer, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_areaobjcollidetomob",
+        "label": "当 任意区域和任意生物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.AreaObjCollideToMob",
+        "msg0": "令触发器事件 当 任意区域和任意生物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "areaObjCollideToMob",
+        "lua": "self:AddTriggerEvent(TriggerEvent.AreaObjCollideToMob, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_areaobjcollidetomissile",
+        "label": "当 任意区域和任意投掷物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.AreaObjCollideToMissile",
+        "msg0": "令触发器事件 当 任意区域和任意投掷物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "areaObjCollideToMissile",
+        "lua": "self:AddTriggerEvent(TriggerEvent.AreaObjCollideToMissile, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_areaobjcollidetodropitem",
+        "label": "当 任意区域和任意掉落物 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.AreaObjCollideToDropItem",
+        "msg0": "令触发器事件 当 任意区域和任意掉落物 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "areaObjCollideToDropItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.AreaObjCollideToDropItem, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_areaobjcollidetoentity",
+        "label": "当 任意区域和任意实体 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.AreaObjCollideToEntity",
+        "msg0": "令触发器事件 当 任意区域和任意实体 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "areaObjCollideToEntity",
+        "lua": "self:AddTriggerEvent(TriggerEvent.AreaObjCollideToEntity, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_areaobjcollidetoareaobj",
+        "label": "当 任意区域和任意区域 碰撞开始",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.AreaObjCollideToAreaObj",
+        "msg0": "令触发器事件 当 任意区域和任意区域 碰撞开始 为 %1",
+        "msg1": "事件传参: EventObjType() ToolObjType() actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "areaObjCollideToAreaObj",
+        "lua": "self:AddTriggerEvent(TriggerEvent.AreaObjCollideToAreaObj, self.{{HANDLER}})",
+        "params_desc": [
+          "EventObjType()",
+          "ToolObjType()",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerareain",
+        "label": "当 任意玩家 进入 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerAreaIn",
+        "msg0": "令触发器事件 当 任意玩家 进入 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerAreaIn",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerAreaIn, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerareaout",
+        "label": "当 任意玩家 离开 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerAreaOut",
+        "msg0": "令触发器事件 当 任意玩家 离开 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerAreaOut",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerAreaOut, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobareain",
+        "label": "当 任意生物 进入 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobAreaIn",
+        "msg0": "令触发器事件 当 任意生物 进入 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "mobAreaIn",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobAreaIn, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobareaout",
+        "label": "当 任意生物 离开 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobAreaOut",
+        "msg0": "令触发器事件 当 任意生物 离开 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "mobAreaOut",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobAreaOut, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_missileareain",
+        "label": "当 任意投掷物 进入 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MissileAreaIn",
+        "msg0": "令触发器事件 当 任意投掷物 进入 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "missileAreaIn",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MissileAreaIn, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_missileareaout",
+        "label": "当 任意投掷物 离开 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MissileAreaOut",
+        "msg0": "令触发器事件 当 任意投掷物 离开 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "missileAreaOut",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MissileAreaOut, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_dropitemareain",
+        "label": "当 任意掉落物 进入 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.DropItemAreaIn",
+        "msg0": "令触发器事件 当 任意掉落物 进入 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "dropItemAreaIn",
+        "lua": "self:AddTriggerEvent(TriggerEvent.DropItemAreaIn, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_dropitemareaout",
+        "label": "当 任意掉落物 离开 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.DropItemAreaOut",
+        "msg0": "令触发器事件 当 任意掉落物 离开 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "dropItemAreaOut",
+        "lua": "self:AddTriggerEvent(TriggerEvent.DropItemAreaOut, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_entityareain",
+        "label": "当 任意实体 进入 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.EntityAreaIn",
+        "msg0": "令触发器事件 当 任意实体 进入 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "entityAreaIn",
+        "lua": "self:AddTriggerEvent(TriggerEvent.EntityAreaIn, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_entityareaout",
+        "label": "当 任意实体 离开 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.EntityAreaOut",
+        "msg0": "令触发器事件 当 任意实体 离开 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "entityAreaOut",
+        "lua": "self:AddTriggerEvent(TriggerEvent.EntityAreaOut, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_areaobjareain",
+        "label": "当 任意区域 进入 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.AreaObjAreaIn",
+        "msg0": "令触发器事件 当 任意区域 进入 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "areaObjAreaIn",
+        "lua": "self:AddTriggerEvent(TriggerEvent.AreaObjAreaIn, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_areaobjareaout",
+        "label": "当 任意区域 离开 区域",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.AreaObjAreaOut",
+        "msg0": "令触发器事件 当 任意区域 离开 区域 为 %1",
+        "msg1": "事件传参: areaid(事件中的区域ID) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "areaObjAreaOut",
+        "lua": "self:AddTriggerEvent(TriggerEvent.AreaObjAreaOut, self.{{HANDLER}})",
+        "params_desc": [
+          "areaid(事件中的区域ID)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobcreate",
+        "label": "当 任意生物 被创建",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobCreate",
+        "msg0": "令触发器事件 当 任意生物 被创建 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "mobCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_entitycreate",
+        "label": "当 任意实体 被创建",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.EntityCreate",
+        "msg0": "令触发器事件 当 任意实体 被创建 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "entityCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.EntityCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_areaobjcreate",
+        "label": "当 任意区域 被创建",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.AreaObjCreate",
+        "msg0": "令触发器事件 当 任意区域 被创建 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "areaObjCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.AreaObjCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      }
+    ],
+    "角色": [
+      {
+        "type": "tev_triggerevent_playerbehurt",
+        "label": "当 任意玩家 受到伤害",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerBeHurt",
+        "msg0": "令触发器事件 当 任意玩家 受到伤害 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) hurtlv(事件中的伤害值) hurttype(伤害类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerBeHurt",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerBeHurt, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "hurtlv(事件中的伤害值)",
+          "hurttype(伤害类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerdie",
+        "label": "当 任意玩家 被击败",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerDie",
+        "msg0": "令触发器事件 当 任意玩家 被击败 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerDie",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerDie, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobbehurt",
+        "label": "当 任意生物 受到伤害",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobBeHurt",
+        "msg0": "令触发器事件 当 任意生物 受到伤害 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) hurtlv(事件中的伤害值) hurttype(伤害类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobBeHurt",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobBeHurt, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "hurtlv(事件中的伤害值)",
+          "hurttype(伤害类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobdie",
+        "label": "当 任意生物 被击败",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobDie",
+        "msg0": "令触发器事件 当 任意生物 被击败 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobDie",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobDie, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerattack",
+        "label": "当 任意玩家 开始攻击",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerAttack",
+        "msg0": "令触发器事件 当 任意玩家 开始攻击 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerAttack",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerAttack, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerattackhit",
+        "label": "当 任意玩家 攻击命中",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerAttackHit",
+        "msg0": "令触发器事件 当 任意玩家 攻击命中 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerAttackHit",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerAttackHit, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerdefeatactor",
+        "label": "当 任意玩家 击败目标",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerDefeatActor",
+        "msg0": "令触发器事件 当 任意玩家 击败目标 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerDefeatActor",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerDefeatActor, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerdamageactor",
+        "label": "当 任意玩家 造成伤害",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerDamageActor",
+        "msg0": "令触发器事件 当 任意玩家 造成伤害 为 %1",
+        "msg1": "事件传参: defaultvalue(自定义数值数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) hurtlv(事件中的伤害值) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerDamageActor",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerDamageActor, self.{{HANDLER}})",
+        "params_desc": [
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "hurtlv(事件中的伤害值)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobattack",
+        "label": "当 任意生物 开始攻击",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobAttack",
+        "msg0": "令触发器事件 当 任意生物 开始攻击 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobAttack",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobAttack, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobattackhit",
+        "label": "当 任意生物 攻击命中",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobAttackHit",
+        "msg0": "令触发器事件 当 任意生物 攻击命中 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) defaultvalue(自定义数值数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobAttackHit",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobAttackHit, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobbeat",
+        "label": "当 任意生物 击败目标",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobBeat",
+        "msg0": "令触发器事件 当 任意生物 击败目标 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobBeat",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobBeat, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobdamage",
+        "label": "当 任意生物 造成伤害",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobDamage",
+        "msg0": "令触发器事件 当 任意生物 造成伤害 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) defaultvalue(自定义数值数据) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) hurtlv(事件中的伤害值) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobDamage",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobDamage, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "hurtlv(事件中的伤害值)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playeraddbuff",
+        "label": "当 任意玩家 获得 状态",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerAddBuff",
+        "msg0": "令触发器事件 当 任意玩家 获得 状态 为 %1",
+        "msg1": "事件传参: buff() buffid(事件中的状态效果) bufflvl() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerAddBuff",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerAddBuff, self.{{HANDLER}})",
+        "params_desc": [
+          "buff()",
+          "buffid(事件中的状态效果)",
+          "bufflvl()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerremovebuff",
+        "label": "当 任意玩家 失去 状态",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerRemoveBuff",
+        "msg0": "令触发器事件 当 任意玩家 失去 状态 为 %1",
+        "msg1": "事件传参: buff() buffid(事件中的状态效果) bufflvl() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerRemoveBuff",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerRemoveBuff, self.{{HANDLER}})",
+        "params_desc": [
+          "buff()",
+          "buffid(事件中的状态效果)",
+          "bufflvl()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobaddbuff",
+        "label": "当 任意生物 获得 状态",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobAddBuff",
+        "msg0": "令触发器事件 当 任意生物 获得 状态 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) buff() buffid(事件中的状态效果) bufflvl() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "mobAddBuff",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobAddBuff, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "buff()",
+          "buffid(事件中的状态效果)",
+          "bufflvl()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobremovebuff",
+        "label": "当 任意生物 失去 状态",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobRemoveBuff",
+        "msg0": "令触发器事件 当 任意生物 失去 状态 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) buff() buffid(事件中的状态效果) bufflvl() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "mobRemoveBuff",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobRemoveBuff, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "buff()",
+          "buffid(事件中的状态效果)",
+          "bufflvl()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerchangeattr",
+        "label": "当 任意玩家 的属性改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerChangeAttr",
+        "msg0": "令触发器事件 当 任意玩家 的属性改变 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) playerattr(玩家属性) playerattrval(玩家属性值) eventworldid(事件中星球)",
+        "handler_default": "playerChangeAttr",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerChangeAttr, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "playerattr(玩家属性)",
+          "playerattrval(玩家属性值)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobchangeattr",
+        "label": "当 任意生物 的属性改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobChangeAttr",
+        "msg0": "令触发器事件 当 任意生物 的属性改变 为 %1",
+        "msg1": "事件传参: actorattr(生物属性) actorattrval(生物属性值) actorid(触发事件的生物类型) eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "mobChangeAttr",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobChangeAttr, self.{{HANDLER}})",
+        "params_desc": [
+          "actorattr(生物属性)",
+          "actorattrval(生物属性值)",
+          "actorid(触发事件的生物类型)",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_actorpickupactor",
+        "label": "当角色举起角色",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ActorPickupActor",
+        "msg0": "令触发器事件 当角色举起角色 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) pickupType(举起或放下类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "actorPickupActor",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ActorPickupActor, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "pickupType(举起或放下类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerattrstatechange",
+        "label": "当 任意玩家权限发生改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerAttrStateChange",
+        "msg0": "令触发器事件 当 任意玩家权限发生改变 为 %1",
+        "msg1": "事件传参: attstateType() attstateValue() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "playerAttrStateChange",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerAttrStateChange, self.{{HANDLER}})",
+        "params_desc": [
+          "attstateType()",
+          "attstateValue()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobattrstatechange",
+        "label": "当 任意生物权限发生改变",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobAttrStateChange",
+        "msg0": "令触发器事件 当 任意生物权限发生改变 为 %1",
+        "msg1": "事件传参: attstateType() attstateValue() eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "mobAttrStateChange",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobAttrStateChange, self.{{HANDLER}})",
+        "params_desc": [
+          "attstateType()",
+          "attstateValue()",
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playermountactor",
+        "label": "当任意玩家 骑乘坐骑/载具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerMountActor",
+        "msg0": "令触发器事件 当任意玩家 骑乘坐骑/载具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerMountActor",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerMountActor, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobmountactor",
+        "label": "当任意生物 骑乘坐骑/载具",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobMountActor",
+        "msg0": "令触发器事件 当任意生物 骑乘坐骑/载具 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobMountActor",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobMountActor, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_playerdismountactor",
+        "label": "当 任意玩家 取消骑乘",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.PlayerDismountActor",
+        "msg0": "令触发器事件 当 任意玩家 取消骑乘 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "playerDismountActor",
+        "lua": "self:AddTriggerEvent(TriggerEvent.PlayerDismountActor, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_mobdismountactor",
+        "label": "当 任意生物 取消骑乘",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MobDismountActor",
+        "msg0": "令触发器事件 当 任意生物 取消骑乘 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) targetactorid(事件中的目标生物类型) toobjid(事件中的目标对象) eventworldid(事件中星球)",
+        "handler_default": "mobDismountActor",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MobDismountActor, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "targetactorid(事件中的目标生物类型)",
+          "toobjid(事件中的目标对象)",
+          "eventworldid(事件中星球)"
+        ]
+      }
+    ],
+    "投掷物": [
+      {
+        "type": "tev_triggerevent_missilecreate",
+        "label": "投掷物创建",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.MissileCreate",
+        "msg0": "令触发器事件 投掷物创建 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) helperobjid() itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) toobjid(事件中的目标对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "missileCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.MissileCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "helperobjid()",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "toobjid(事件中的目标对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_projectilehitblock",
+        "label": "当 投掷物 击中 任意方块",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ProjectileHitBlock",
+        "msg0": "令触发器事件 当 投掷物 击中 任意方块 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) defaultvalue(自定义数值数据) eventobjid(触发事件的对象) helperobjid() itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "projectileHitBlock",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ProjectileHitBlock, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "helperobjid()",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_projectilehitplayer",
+        "label": "当 投掷物 击中 任意玩家",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ProjectileHitPlayer",
+        "msg0": "令触发器事件 当 投掷物 击中 任意玩家 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) defaultvalue(自定义数值数据) eventobjid(触发事件的对象) helperobjid() itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "projectileHitPlayer",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ProjectileHitPlayer, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "helperobjid()",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_projectilehitmob",
+        "label": "当 投掷物 击中 任意生物",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ProjectileHitMob",
+        "msg0": "令触发器事件 当 投掷物 击中 任意生物 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) defaultvalue(自定义数值数据) eventobjid(触发事件的对象) helperobjid() itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "projectileHitMob",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ProjectileHitMob, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "helperobjid()",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_projectilehitproj",
+        "label": "当 投掷物 击中 任意投掷物",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ProjectileHitProj",
+        "msg0": "令触发器事件 当 投掷物 击中 任意投掷物 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) defaultvalue(自定义数值数据) eventobjid(触发事件的对象) helperobjid() itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "projectileHitProj",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ProjectileHitProj, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "helperobjid()",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_projectilehititem",
+        "label": "当 投掷物 击中 任意掉落物",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ProjectileHitItem",
+        "msg0": "令触发器事件 当 投掷物 击中 任意掉落物 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) defaultvalue(自定义数值数据) eventobjid(触发事件的对象) helperobjid() itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "projectileHitItem",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ProjectileHitItem, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "helperobjid()",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_projectilehitentity",
+        "label": "当 投掷物 击中 任意实体",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ProjectileHitEntity",
+        "msg0": "令触发器事件 当 投掷物 击中 任意实体 为 %1",
+        "msg1": "事件传参: actorid(触发事件的生物类型) defaultvalue(自定义数值数据) eventobjid(触发事件的对象) helperobjid() itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "projectileHitEntity",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ProjectileHitEntity, self.{{HANDLER}})",
+        "params_desc": [
+          "actorid(触发事件的生物类型)",
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "helperobjid()",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      }
+    ],
+    "掉落物": [
+      {
+        "type": "tev_triggerevent_itemcreate",
+        "label": "当掉落物创建",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ItemCreate",
+        "msg0": "令触发器事件 当掉落物创建 为 %1",
+        "msg1": "事件传参: defaultvalue(自定义数值数据) eventobjid(触发事件的对象) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "itemCreate",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ItemCreate, self.{{HANDLER}})",
+        "params_desc": [
+          "defaultvalue(自定义数值数据)",
+          "eventobjid(触发事件的对象)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_dropitempickup",
+        "label": "当 掉落物 被拾取",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.DropItemPickup",
+        "msg0": "令触发器事件 当 掉落物 被拾取 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) eventworldid(事件中星球)",
+        "handler_default": "dropItemPickup",
+        "lua": "self:AddTriggerEvent(TriggerEvent.DropItemPickup, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "eventworldid(事件中星球)"
+        ]
+      },
+      {
+        "type": "tev_triggerevent_itemdisappear",
+        "label": "当 掉落物 消失",
+        "is_event": true,
+        "prefix_type": "trigger",
+        "event_name": "TriggerEvent.ItemDisappear",
+        "msg0": "令触发器事件 当 掉落物 消失 为 %1",
+        "msg1": "事件传参: eventobjid(触发事件的对象) itemid(事件中的道具类型) itemix(事件中的格子ID) itemnum(事件中的道具数量) x(事件中位置X) y(事件中位置Y) z(事件中位置Z) eventworldid(事件中星球)",
+        "handler_default": "itemDisappear",
+        "lua": "self:AddTriggerEvent(TriggerEvent.ItemDisappear, self.{{HANDLER}})",
+        "params_desc": [
+          "eventobjid(触发事件的对象)",
+          "itemid(事件中的道具类型)",
+          "itemix(事件中的格子ID)",
+          "itemnum(事件中的道具数量)",
+          "x(事件中位置X)",
+          "y(事件中位置Y)",
+          "z(事件中位置Z)",
+          "eventworldid(事件中星球)"
+        ]
+      }
+    ]
+  },
+  "separators": {}
+}

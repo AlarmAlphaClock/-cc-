@@ -1,0 +1,512 @@
+{
+  "blocks": {
+    "基础": [
+      {
+        "type": "enum_worldtype",
+        "label": "游戏模式",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_terraintype",
+        "label": "游戏地形",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_gamesetting",
+        "label": "游戏设置类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_teamresults",
+        "label": "游戏战斗结果",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_vartype",
+        "label": "变量类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_errorcode",
+        "label": "错误码",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_loglevel",
+        "label": "输出日志等级",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_devicetype",
+        "label": "设备类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_matchmode",
+        "label": "标签匹配方式",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_vdistance",
+        "label": "视野距离",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_sorttype",
+        "label": "排序方式",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_difficulty",
+        "label": "难度枚举",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_keycode",
+        "label": "按键",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_color",
+        "label": "颜色枚举",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_sound",
+        "label": "音效枚举",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_particle",
+        "label": "粒子枚举",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_interacttype",
+        "label": "交互类型枚举",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_custom",
+        "label": "自定义枚举值",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_eventdate",
+        "label": "时间值枚举",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_abilityswitch",
+        "label": "动作总开关",
+        "mutator": "1"
+      }
+    ],
+    "方向与移动": [
+      {
+        "type": "enum_facedir",
+        "label": "朝向",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_facetype",
+        "label": "朝向类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_turnfacedir",
+        "label": "角度朝向",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_viewport",
+        "label": "视口方向",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_hoffset",
+        "label": "水平偏移",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_voffset",
+        "label": "垂直偏移",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_movetype",
+        "label": "移动方式",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_cameramodel",
+        "label": "摄像机属性",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_camerarot",
+        "label": "摄像机旋转模式",
+        "mutator": "1"
+      }
+    ],
+    "玩家": [
+      {
+        "type": "enum_roleattr",
+        "label": "生物/玩家属性",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_playermotion",
+        "label": "玩家行为",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_rolemotion",
+        "label": "角色行为",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_backpacktype",
+        "label": "玩家背包类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_backpackbegin",
+        "label": "背包起始索引",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_playername",
+        "label": "玩家内置UI类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_playerbodyui",
+        "label": "控件高度",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_pickupaction",
+        "label": "举起动作类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_rolepickup",
+        "label": "角色举起类型",
+        "mutator": "1"
+      }
+    ],
+    "生物": [
+      {
+        "type": "enum_mobtype",
+        "label": "生物类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_creatureattr",
+        "label": "生物属性",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_creaturemotion",
+        "label": "生物行为",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_biometype",
+        "label": "怪物刷新地形",
+        "mutator": "1"
+      }
+    ],
+    "方块与道具": [
+      {
+        "type": "enum_blockattr",
+        "label": "方块属性",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_blocklimits",
+        "label": "方块权限",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_blockstatus",
+        "label": "方块状态",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_itemattr",
+        "label": "道具属性",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_itemability",
+        "label": "道具设置",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_dropmode",
+        "label": "掉落物掉落方式",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_objtype",
+        "label": "对象类型",
+        "mutator": "1"
+      }
+    ],
+    "天气": [
+      {
+        "type": "enum_weathertype",
+        "label": "天气类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_groupweather",
+        "label": "局部天气状态",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_weathergroup",
+        "label": "地形组枚举",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_cameraedit",
+        "label": "视角编辑状态",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_skyboxmap",
+        "label": "天空盒贴图",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_skyboxcolor",
+        "label": "天空盒颜色",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_skyboxattr",
+        "label": "天空盒参数",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_skyboxparticle",
+        "label": "天空盒环境粒子",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_skyboxfilter",
+        "label": "天空盒滤镜参数",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_skyboxswitch",
+        "label": "天空盒开关",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_skyboxtime",
+        "label": "天空盒时间",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_easing",
+        "label": "线性变换",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_animmode",
+        "label": "动作播放方式",
+        "mutator": "1"
+      }
+    ],
+    "伤害与战斗": [
+      {
+        "type": "enum_hurttype",
+        "label": "伤害类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_gundamage",
+        "label": "枪械伤害类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_gunfiretype",
+        "label": "开火类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_gunspread",
+        "label": "散布形状",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_gunstate",
+        "label": "枪械状态",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_gunaction",
+        "label": "枪械触发事件类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_gunactionban",
+        "label": "枪械禁用类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_gunattr",
+        "label": "枪械属性",
+        "mutator": "1"
+      }
+    ],
+    "阵营": [
+      {
+        "type": "enum_absolutecamp",
+        "label": "绝对阵营",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_relativecamp",
+        "label": "相对阵营",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_teamattr",
+        "label": "队伍属性",
+        "mutator": "1"
+      }
+    ],
+    "界面": [
+      {
+        "type": "enum_graphicstype",
+        "label": "图文信息类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_elementtype",
+        "label": "元件类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_elementattr",
+        "label": "元件属性",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_uiattr",
+        "label": "界面属性",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_pixelunits",
+        "label": "像素单位",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_uiscrolldir",
+        "label": "UI滑动方向",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_progressimg",
+        "label": "进度图案",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_progressval",
+        "label": "进度值类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_innerpopup",
+        "label": "弹窗界面类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_videoplay",
+        "label": "视频播放模式",
+        "mutator": "1"
+      }
+    ],
+    "商店与插件": [
+      {
+        "type": "enum_minicurrency",
+        "label": "货币类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_minishop",
+        "label": "商店页面类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_minishopdata",
+        "label": "皮肤数据类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_equipslot",
+        "label": "装备部位类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_custommod",
+        "label": "插件类型",
+        "mutator": "1"
+      }
+    ],
+    "区域与组件": [
+      {
+        "type": "enum_areafill",
+        "label": "区域填充类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_areaclone",
+        "label": "区域复制类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_raydetect",
+        "label": "射线检测返回类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_workstage",
+        "label": "强制打开工作台",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_beaconmap",
+        "label": "信标映射类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_beaconclamp",
+        "label": "信标限制类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_minimapmark",
+        "label": "小地图图标类型",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_cmpproperm",
+        "label": "组件属性访问权限",
+        "mutator": "1"
+      },
+      {
+        "type": "enum_cmpuiperm",
+        "label": "组件面板显示控制",
+        "mutator": "1"
+      }
+    ]
+  },
+  "separators": {}
+}

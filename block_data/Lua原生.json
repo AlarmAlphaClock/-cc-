@@ -1,0 +1,126 @@
+{
+  "blocks": {
+    "Lua原生": [
+      {
+        "type": "event_func_def",
+        "label": "事件触发时",
+        "lua": "MUTATOR",
+        "mutator": "1"
+      },
+      {
+        "type": "func_def",
+        "label": "定义函数",
+        "lua": "MUTATOR",
+        "mutator": "func_params_mutator"
+      },
+      {
+        "type": "func_def_return",
+        "label": "定义有返回值函数",
+        "lua": "MUTATOR",
+        "mutator": "func_params_mutator"
+      },
+      {
+        "type": "return_block",
+        "label": "返回块",
+        "lua": "return {{value}}"
+      },
+      {
+        "type": "var_assign",
+        "label": "赋值",
+        "lua": "{{name}} = {{value}}"
+      },
+      {
+        "type": "var_multi_assign",
+        "label": "多重赋值",
+        "lua": "MUTATOR",
+        "mutator": "multi_assign_mutator"
+      },
+      {
+        "type": "num_value",
+        "label": "数值",
+        "lua": "{{number}}",
+        "output": true
+      },
+      {
+        "type": "str_value",
+        "label": "文本",
+        "lua": "\"{{text}}\"",
+        "output": true
+      },
+      {
+        "type": "bool_true",
+        "label": "真 true",
+        "lua": "true",
+        "output": true
+      },
+      {
+        "type": "bool_false",
+        "label": "假 false",
+        "lua": "false",
+        "output": true
+      },
+      {
+        "type": "table_create",
+        "label": "空表值 {}",
+        "lua": "{}",
+        "output": true
+      },
+      {
+        "type": "table_kv",
+        "label": "键值对表值",
+        "lua": "MUTATOR",
+        "output": true,
+        "mutator": "table_kv_mutator"
+      },
+      {
+        "type": "table_arr",
+        "label": "数组表值",
+        "lua": "MUTATOR",
+        "output": true,
+        "mutator": "table_arr_mutator"
+      },
+      {
+        "type": "num_def",
+        "label": "定义数值变量",
+        "lua": "local {{name}} = {{value}}"
+      },
+      {
+        "type": "str_def",
+        "label": "定义字符串变量",
+        "lua": "local {{name}} = {{value}}"
+      },
+      {
+        "type": "bool_def",
+        "label": "定义布尔变量",
+        "lua": "local {{name}} = {{value}}"
+      },
+      {
+        "type": "table_def",
+        "label": "定义表变量",
+        "lua": "local {{name}} = {{value}}"
+      },
+      {
+        "type": "var_generic",
+        "label": "通用变量",
+        "lua": "{{text}}",
+        "output": true
+      },
+      {
+        "type": "var_local",
+        "label": "定义局部变量",
+        "lua": "local {{name}} = {{value}}"
+      },
+      {
+        "type": "nil_set",
+        "label": "赋值为空 nil",
+        "lua": "{{name}} = nil"
+      },
+      {
+        "type": "field_del",
+        "label": "删除表字段",
+        "lua": "{{table}}[{{key}}] = nil"
+      }
+    ]
+  },
+  "separators": {}
+}
